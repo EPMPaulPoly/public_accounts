@@ -1,4 +1,4 @@
-# budgets_municipaux : a tool for exploring Quebec's municipal public accounts
+# public_accounts : a tool for exploring Quebec's municipal public accounts
 This project aims to create an automated means to display and comprehend municipal 
 budgets and better understand how different municipalities spend their dollars. The project
 was started in the context of a transportation research project so additionnal work is 
