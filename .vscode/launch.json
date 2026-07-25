@@ -1,0 +1,196 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Script with Prompted Args (Conda Env)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "python": "C:/Users/paulc/.conda/envs/masters_data_eng/python.exe",
+            "args": [
+                "${input:myArgs}"
+            ]
+        },
+        {
+            "name": "Python: Script with Prompted Args (Conda Env) Ubuntu",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "python": "${command:python.interpreterPath}",
+            "args": [
+                "${input:myArgs}"
+            ]
+        },
+        {
+            "name": "Python: Current File (Conda Env)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "python": "/"
+        },
+        {
+            "name": "Debug Frontend",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}/client",
+            "sourceMapPathOverrides": {
+                "/app/*": "${workspaceFolder}/client/*"
+            }
+        },
+        {
+            "name": "Debug Frontend (Ubuntu)",
+            "type": "pwa-chrome", // <-- moderne, fonctionne mieux
+            "request": "launch",
+            "runtimeExecutable": "/snap/bin/chromium", // chemin absolu
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}/apps/frontend",
+            "runtimeArgs": [
+                "--user-data-dir=${workspaceFolder}/.vscode/chrome", // profil séparé
+                "--remote-debugging-port=9222" // port pour debugger
+            ],
+            "breakOnLoad": true,
+            "sourceMaps": true,
+            "smartStep": true,
+            "sourceMapPathOverrides": {
+                "/app/*": "${workspaceFolder}/apps/frontend/*"
+            }
+        },
+        {
+            "name": "Debug Backend",
+            "type": "node",
+            "request": "attach",
+            "port": 9229,
+            "address": "localhost",
+            "localRoot": "${workspaceFolder}/serveur",
+            "remoteRoot": "/app/serveur",
+            "restart": true,
+            "sourceMaps": true,
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "resolveSourceMapLocations": [
+                "${workspaceFolder}/serveur/**",
+                "!**/node_modules/**"
+            ],
+            "outFiles": [
+                "${workspaceFolder}/serveur/dist/**/*.js"
+            ],
+            "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "name": "Debug Backend (nodemon + ts-node)",
+            "type": "node",
+            "request": "attach",
+            "port": 9229,
+            "address": "localhost",
+            "localRoot": "${workspaceFolder}/serveur",
+            "remoteRoot": "/app/serveur",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "restart": true,
+            "timeout": 3000,
+            "trace": true
+        },
+        {
+            "name": "Attach to 3000",
+            "type": "node",
+            "request": "attach",
+            "port": 3000
+        },
+        {
+            "name": "Inventaire par quartier",
+            "type": "debugpy",
+            "pythonArgs": [
+                "-O"
+            ],
+            "request": "launch",
+            "program": "${workspaceFolder}/serveur_calcul_python/calcul_par_quartier.py",
+            "args": [
+                "16"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Attach TSX in Docker",
+            "type": "node",
+            "request": "attach",
+            "address": "localhost",
+            "port": 9229,
+            "restart": true,
+            "localRoot": "${workspaceFolder}",
+            "remoteRoot": "/app",
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        },
+        {
+            "name": "Python: Attach Docker",
+            "type": "debugpy",
+            "request": "attach",
+            "connect": {
+                "host": "localhost",
+                "port": 5678
+            },
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}/serveur_calcul_python",
+                    "remoteRoot": "/app/serveur_calcul_python"
+                }
+            ],
+            "subProcess": true,
+            "justMyCode": false
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug Scratch",
+            "runtimeExecutable": "npx",
+            "runtimeArgs": [
+                "tsx"
+            ],
+            "args": [
+                "./apps/backend/src/scratch.ts"
+            ],
+            "cwd": "${workspaceFolder}",
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Full Stack: Frontend + Backend",
+            "configurations": [
+                "Debug Frontend",
+                "Debug Backend"
+            ]
+        },
+        {
+            "name": "Full Stack Ubuntu",
+            "configurations": [
+                "Debug Frontend (Ubuntu)",
+                "Debug Backend"
+            ]
+        },
+        {
+            "name": "Full Stack: Frontend + Backend + Python",
+            "configurations": [
+                "Debug Frontend",
+                "Debug Backend",
+                "Python: Attach Docker"
+            ]
+        }
+    ],
+    "inputs": [
+        {
+            "id": "myArgs",
+            "type": "promptString",
+            "description": "Enter arguments"
+        }
+    ]
+}

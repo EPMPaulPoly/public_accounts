@@ -1,0 +1,5 @@
+.vscode/chrome/
+
+**/node_modules
+data
+.env
