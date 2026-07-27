@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Home from './pages/Home' 
 import './App.css'
@@ -14,6 +14,8 @@ import MunicIndicatorsCreation from './pages/MunicIndicatorsCreation';
 import MunicIndicatorsAnalysis from './pages/MunicIndicatorsAnalysis';
 import LoginPage from './pages/Login';
 import { AuthProvider } from './context/authProvider';
+import AdminProtectedRoute from './utils/ProtectedRoute';
+import AdminPage from './pages/Admin';
 
 const theme = createTheme({
   palette: {
@@ -43,6 +45,12 @@ function App() {
 					<Route path="/ern" element={<EtatResultatNet/>}/>
 					<Route path="/esf" element={<EtatSituationFinanciere/>}/>
 					<Route path='/dep1' element={<AnalyseDesDepenses/>}/>
+
+					<Route element={<AdminProtectedRoute/>}>
+						<Route path='/admin' element={<AdminPage/>}/>
+					</Route>
+
+          			<Route path="*" element={<Navigate to="/" />} />
 				</Routes>
 			</BrowserRouter>
 		</ThemeProvider>

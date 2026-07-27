@@ -12,7 +12,7 @@ import ListSubheader from '@mui/material/ListSubheader';
 
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authProvider";
-import { Icon } from "@mui/material";
+import { Button, Icon } from "@mui/material";
 import { Login, Logout } from "@mui/icons-material";
 
 const StyledListHeader = styled(ListSubheader)({
@@ -33,11 +33,12 @@ const municipalPages = [
 //    { label: "État de la Situtation Financière", path: "/esf" },
 //    { label: "Analyse des dépenses", path:"/dep1"    }
 ]
-
+const adminPages =[
+    { label:'Admin', path:'/admin'}
+]
 
 function MenuBar() {
-    const{isAuthenticated,logout}=useAuth()
-    const{palette} = useTheme()
+    const{isAuthenticated,logout,session,isImpersonating,stopImpersonating}=useAuth()
     const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
     const navigate = useNavigate();
 
@@ -58,20 +59,24 @@ function MenuBar() {
                     <MenuIcon />
                 </IconButton>
                 {isAuthenticated ?
-                    <IconButton
+                    <Button
                         onClick={logout}
                         color="inherit"
+                        variant="outlined"
                     >
                         <Logout
-                        />
-                    </IconButton> : <>
-                        <IconButton
+                        /> Logout
+                    </Button> : <>
+                        <Button
                             onClick={()=>navigate('/login')}
                             color="inherit"
+                            variant='outlined'
                         >
-                            <Login/>
-                        </IconButton>
+                            <Login/>Login
+                        </Button>
                     </>}
+                {isImpersonating?<div style={{paddingLeft:5}}><Button variant="outlined" color="inherit" onClick={stopImpersonating} >Arreter d'imiter</Button></div>:<></>}
+
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
                     Exploration finances municipales
                 </Typography>
@@ -104,6 +109,21 @@ function MenuBar() {
                             {p.label}
                         </MenuItem>
                     ))}
+                    {session?.user.role==='admin'?<>
+                        <StyledListHeader>Admin</StyledListHeader>
+                        {adminPages.map((p)=>{return(
+                            <MenuItem
+                                key={p.path}
+                                onClick={() => {
+                                    navigate(p.path);
+                                    closeMenu();
+                                }}
+                            >
+                                {p.label}
+                            </MenuItem>)
+                        })}</>:<>
+                        </>
+                    }
                 </Menu>
 
             </Toolbar>

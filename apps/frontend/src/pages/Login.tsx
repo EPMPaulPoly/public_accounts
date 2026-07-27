@@ -3,6 +3,7 @@ import MenuBar from "../components/common/MenuBar";
 import { useState, } from "react";
 import { useAuth } from "../context/authProvider";
 import { useNavigate } from "react-router-dom";
+import { getPasswordRequirements } from "../utils/PasswordComplexityCheck";
 
 export default function LoginPage(){
     const{login}=useAuth()
@@ -17,6 +18,7 @@ export default function LoginPage(){
             navigate('/')
         }
     }
+    const passwordIssues=getPasswordRequirements(password)
     return(<>
         <MenuBar/>
         <div
@@ -42,9 +44,15 @@ export default function LoginPage(){
             
             <TextField type='text' label='Username' key='username' value={username} onChange={(e)=>setUsername(e.target.value)}/>
             <TextField type='password' label='Password' key='password' value={password} onChange={(e)=>setPassword(e.target.value)}/>
+            <span
+                style={{whiteSpace:'pre-line'}}
+            >
+            {passwordIssues.map((i)=>i+'\n')}    
+            </span>
             <Button
                 variant="outlined"
                 onClick={onSubmit}
+                disabled={passwordIssues.length!==0}
             >
                 Login
             </Button>

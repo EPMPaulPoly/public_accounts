@@ -14,12 +14,16 @@ interface AuthContextType {
             updatedAt: Date
             emailVerified: boolean
             image?: string | null
+            role?:'admin'|'user'
         }
     } | null
     isLoading: boolean
     isAuthenticated: boolean
     login: (email: string, password: string) => Promise<{ data: any; error: any }>
     logout: () => Promise<void>
+    isImpersonating:boolean
+    stopImpersonating:()=>Promise<void>
+    refreshSession:()=>Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType>({} as any)
@@ -76,13 +80,31 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setSession(null)
     }
 
+    const isImpersonating = !!session?.session?.impersonatedBy        
+    
+    const stopImpersonating = async ()=>{
+        const {data,error}= await authClient.admin.stopImpersonating()
+        await refreshSession()
+        if (error){
+            alert('error when revoking impersonation')
+        }
+    }
+
+    const refreshSession = useCallback(async () => {
+        const { data } = await authClient.getSession()
+        setSession(data)
+    }, [])
+
     return (
         <AuthContext.Provider value={{ 
             session, 
             isLoading, 
             isAuthenticated: !!session,
             login, 
-            logout 
+            logout,
+            isImpersonating,
+            stopImpersonating,
+            refreshSession
         }}>
             {children}
         </AuthContext.Provider>
