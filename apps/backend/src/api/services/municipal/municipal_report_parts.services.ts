@@ -1,5 +1,5 @@
 import { Database } from "../../../db/types";
-import { Kysely } from "kysely";
+import { Kysely, sql } from "kysely";
 import { db } from "../../../db/db";
 import { municPartRepository } from "../../repositories/municipal/munic_report_parts.repositories";
 class ReportPartsService {
@@ -9,6 +9,7 @@ class ReportPartsService {
         const query = db
             .selectFrom("municipal_qc.report_parts")
             .selectAll()
+            .orderBy(sql<number>`substring(${sql.ref('municipal_qc.report_parts.part_page_def')} from 2)::integer`)
 
         console.log("→ SQL about to run")
         console.log("SQL:", query.compile().sql)
