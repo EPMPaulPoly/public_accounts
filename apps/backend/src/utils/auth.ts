@@ -41,6 +41,12 @@ export const auth = betterAuth({
         return password; // return the password to proceed with hashing
       },
     },
+    user: {
+      changeEmail: {
+        enabled: true,
+        updateEmailWithoutVerification: true // Update email without verification if user is not verified
+      },
+    },
     trustedOrigins:[
         process.env.TRUSTED_FRONTEND||'http://localhost:5173'
     ],

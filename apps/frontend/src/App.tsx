@@ -14,8 +14,10 @@ import MunicIndicatorsCreation from './pages/MunicIndicatorsCreation';
 import MunicIndicatorsAnalysis from './pages/MunicIndicatorsAnalysis';
 import LoginPage from './pages/Login';
 import { AuthProvider } from './context/authProvider';
-import AdminProtectedRoute from './utils/ProtectedRoute';
+import AdminProtectedRoute from './utils/AdminProtectedRoute';
 import AdminPage from './pages/Admin';
+import UserProtectedRoute from './utils/UserProtectedRoute';
+import UserProfile from './pages/UserProfile';
 
 const theme = createTheme({
   palette: {
@@ -45,7 +47,9 @@ function App() {
 					<Route path="/ern" element={<EtatResultatNet/>}/>
 					<Route path="/esf" element={<EtatSituationFinanciere/>}/>
 					<Route path='/dep1' element={<AnalyseDesDepenses/>}/>
-
+					<Route element={<UserProtectedRoute/>}>
+						<Route path='/profil' element={<UserProfile/>}/>
+					</Route>
 					<Route element={<AdminProtectedRoute/>}>
 						<Route path='/admin' element={<AdminPage/>}/>
 					</Route>

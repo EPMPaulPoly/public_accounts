@@ -12,8 +12,8 @@ import ListSubheader from '@mui/material/ListSubheader';
 
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authProvider";
-import { Button, Icon } from "@mui/material";
-import { Login, Logout } from "@mui/icons-material";
+import { Avatar, Button, Icon } from "@mui/material";
+import { AccountBox, AdminPanelSettings, Login, Logout } from "@mui/icons-material";
 
 const StyledListHeader = styled(ListSubheader)({
   backgroundImage: 'var(--Paper-overlay)',
@@ -58,24 +58,8 @@ function MenuBar() {
                 >
                     <MenuIcon />
                 </IconButton>
-                {isAuthenticated ?
-                    <Button
-                        onClick={logout}
-                        color="inherit"
-                        variant="outlined"
-                    >
-                        <Logout
-                        /> Logout
-                    </Button> : <>
-                        <Button
-                            onClick={()=>navigate('/login')}
-                            color="inherit"
-                            variant='outlined'
-                        >
-                            <Login/>Login
-                        </Button>
-                    </>}
-                {isImpersonating?<div style={{paddingLeft:5}}><Button variant="outlined" color="inherit" onClick={stopImpersonating} >Arreter d'imiter</Button></div>:<></>}
+                
+                
 
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
                     Exploration finances municipales
@@ -109,21 +93,51 @@ function MenuBar() {
                             {p.label}
                         </MenuItem>
                     ))}
+                    <StyledListHeader>Usager</StyledListHeader>
+
+                    {session?.user ? <>
+                        <MenuItem
+                            key={'/proile'}
+                            onClick={() => {
+                                navigate('/profil');
+                                closeMenu();
+                            }}
+                        >
+                            <AccountBox/>
+                            Profil
+                        </MenuItem>
+                    </> : <></>}
+                    
+                    {isAuthenticated ?
+                        <MenuItem
+                            onClick={logout}
+                        >
+                            <Logout
+                            /> Logout
+                        </MenuItem> : <>
+                            <MenuItem
+                                onClick={() => navigate('/login')}
+                            >
+                                <Login />Login
+                            </MenuItem>
+                        </>}    
                     {session?.user.role==='admin'?<>
                         <StyledListHeader>Admin</StyledListHeader>
-                        {adminPages.map((p)=>{return(
+
                             <MenuItem
-                                key={p.path}
+                                key={'/admin'}
                                 onClick={() => {
-                                    navigate(p.path);
+                                    navigate('/admin');
                                     closeMenu();
                                 }}
                             >
-                                {p.label}
-                            </MenuItem>)
-                        })}</>:<>
+                                <AdminPanelSettings/>Administrateur
+                            </MenuItem>
+                        </>:<>
                         </>
                     }
+                    {isImpersonating?<MenuItem onClick={stopImpersonating} >Arreter d'imiter</MenuItem>:<></>}
+
                 </Menu>
 
             </Toolbar>

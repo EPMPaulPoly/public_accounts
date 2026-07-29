@@ -15,6 +15,8 @@ interface AuthContextType {
             emailVerified: boolean
             image?: string | null
             role?:'admin'|'user'
+            username:string|null,
+            displayUsername:string|null
         }
     } | null
     isLoading: boolean
