@@ -29,9 +29,20 @@ function UserChangePasswordModal(props:UCPMProps){
 
 
     const oldPwdCompCheck=checkPasswordComplexity(oldPwd)
-    const isOldPwdValid= oldPwdCompCheck.digit&&oldPwdCompCheck.length&&oldPwdCompCheck.lowercase&&oldPwdCompCheck.special&&oldPwdCompCheck.uppercase
+    const isOldPwdValid= 
+            oldPwdCompCheck.digit&&
+            oldPwdCompCheck.length&&
+            oldPwdCompCheck.lowercase&&
+            oldPwdCompCheck.special&&
+            oldPwdCompCheck.uppercase
     const newPwdCompCheck=checkPasswordComplexity(oldPwd)
-    const isNewPwdValid= newPwdCompCheck.digit   &&newPwdCompCheck.length&&newPwdCompCheck.lowercase&&newPwdCompCheck.special&&newPwdCompCheck.uppercase&&newPwd===newPwdConf
+    const isNewPwdValid= 
+            newPwdCompCheck.digit   &&
+            newPwdCompCheck.length&&
+            newPwdCompCheck.lowercase&&
+            newPwdCompCheck.special&&
+            newPwdCompCheck.uppercase&&
+            newPwd===newPwdConf
     async function handlePasswordChange(){
         const userId=session?.user.id
         if (userId&&isOldPwdValid&&isNewPwdValid){
@@ -50,6 +61,8 @@ function UserChangePasswordModal(props:UCPMProps){
             }
         }
     }
+
+    const disableButton=!(isOldPwdValid&&isNewPwdValid)
     return (<>
         <Modal
             open={props.open}
@@ -77,6 +90,10 @@ function UserChangePasswordModal(props:UCPMProps){
                     value={oldPwd}
                     onChange={(e)=>setOldPwd(e.target.value)}
                 />
+                {isOldPwdValid?<span
+                    style={{whiteSpace:"pre-line"}}
+                >
+                    Old password format valid</span>:<></>}
                 <UserPasswordWidget
                     values={{
                         password:newPwd,
@@ -88,7 +105,8 @@ function UserChangePasswordModal(props:UCPMProps){
                     }}
                 />
                 <Button
-                    disabled={!oldPwdCompCheck&&!newPwdCompCheck}
+                    disabled={disableButton}
+                    color={!disableButton?'success':'error'}
                     onClick={handlePasswordChange}
                     variant="outlined"
                 >

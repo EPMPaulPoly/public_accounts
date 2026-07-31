@@ -5,7 +5,7 @@ import TableERN from "../../components/visualisation/TableERN"
 import SankeyERN from "../../components/visualisation/SankeyERN"
 import { UseERNCityYearChange } from "../../hooks/old/UseERNCityYearChange"
 import ChoixVilleAnnee from "../../components/selectors/ChoixVilleAnnee"
-import { useCityYear } from "../../context/contextProvider"
+import { useAppContext } from "../../context/contextProvider"
 import type { year } from "@budgets_municipaux/common"
 import { serviceMunicEnt } from "../../services/mun/serviceMunicEntites"
 function EtatResultatNet() {
@@ -14,7 +14,7 @@ function EtatResultatNet() {
         year,
         setMunicipality,
         setYear,
-    } = useCityYear();
+    } = useAppContext();
     const [vue,defVue] = useState<'tab'|'sankey'|'bar'>('tab')
 
     const [yearOptions,setYearOptions]= useState<year[]>([])

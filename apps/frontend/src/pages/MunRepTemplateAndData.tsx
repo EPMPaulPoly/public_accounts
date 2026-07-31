@@ -7,6 +7,8 @@ import ModalReportSectionModCreate from "../components/objectCreation/ModalRepor
 import ReportPageCreator from "../components/objectCreation/ReportPageCreator";
 import { useReportSetupVisualization } from "../hooks/wrappers/RepTemplateAndData/useReportSetupVisualization";
 import { Footer } from "../components/common/Footer";
+import { UserSnackCommunication } from "../components/common/UserSnackCommunication";
+import { useAppContext } from "../context/contextProvider";
 /**
  * 
  * @returns A React page which enables user to structure report and assign provincial ids to the relevan columns
@@ -23,9 +25,14 @@ function MunRepTemplateAndData(){
     const [editing, setEditing] = useState<boolean>(false)
     
     const viz = useReportSetupVisualization()
+    const{snackOpen,setSnackOpen,setSnackMessage,setSnackSev,snackMessage,snackSev}=useAppContext()
     return(
         <div style={{flexDirection:'column',overflow:'hidden',display:'flex',height:'100vh'}}>
-            <MenuBar/>
+            <MenuBar
+                setSnackOpen={setSnackOpen}
+                setSnackSev={setSnackSev}
+                setSnackMessage={setSnackMessage}
+            />
             <div>
                 <Box sx={{
                     display: 'flex',
@@ -93,6 +100,12 @@ function MunRepTemplateAndData(){
                 />
 
             </div>
+            <UserSnackCommunication
+                snackMessage={snackMessage}
+                snackSev={snackSev}
+                setSnackOpen={setSnackOpen}
+                snackOpen={snackOpen}
+            />
             <Footer/>
         </div>
     )

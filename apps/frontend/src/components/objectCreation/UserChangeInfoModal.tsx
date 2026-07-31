@@ -1,9 +1,8 @@
-import { Alert, Box, Button, Collapse, IconButton, Modal, Snackbar } from "@mui/material"
+import { Box, Button, Modal} from "@mui/material"
 import { useEffect, useState, type Dispatch, type SetStateAction } from "react"
 import UserInfoWidget from "../userInputs/UserInfoWidget"
 import { useAuth } from "../../context/authProvider"
 import { authClient } from "../../utils/auth-client"
-import { Check, Close } from "@mui/icons-material"
 
 interface UCIMProps{
     open:boolean,

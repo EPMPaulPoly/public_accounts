@@ -4,7 +4,7 @@ import Home from './pages/Home'
 import './App.css'
 import EtatResultatNet from './pages/old/EtatResultatsNet'
 import EtatSituationFinanciere from './pages/old/EtatSituationFinanciere';
-import { CityYearProvider } from './context/contextProvider';
+import { AppContextProvider } from './context/contextProvider';
 import { AnalyseDesDepenses } from './pages/old/AnalyseDesDepenses';
 import MunicipalitiesOverview  from './pages/MunicipalitiesOverview';
 import MunRepTemplateAndData from './pages/MunRepTemplateAndData';
@@ -31,8 +31,9 @@ function App() {
 
 	return (
 		<>
+
+		<AppContextProvider>
 		<AuthProvider>
-		<CityYearProvider>
 		<ThemeProvider theme={theme}>
 			<BrowserRouter>
 				<Routes>
@@ -58,8 +59,8 @@ function App() {
 				</Routes>
 			</BrowserRouter>
 		</ThemeProvider>
-		</CityYearProvider>
 		</AuthProvider>
+		</AppContextProvider>
 		</>
 	)
 }

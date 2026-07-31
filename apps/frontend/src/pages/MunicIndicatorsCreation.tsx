@@ -13,18 +13,28 @@ import {
 import IndicatorVariablesDisplay from "../components/visualisation/IndicatorVariablesDisplay";
 import CreateModMunicIndVarModal from "../components/objectCreation/CreateModMunicIndVarModal";
 import { Footer } from "../components/common/Footer";
+import { useAppContext } from "../context/contextProvider";
+import { UserSnackCommunication } from "../components/common/UserSnackCommunication";
 
 
 function MunicIndicatorsCreation(){
     const viz= useMunicIndicatorsCreationVisualization()
     const [eqDefModalOpen,setEqDefModalOpen]=useState<boolean>(false);
     const [eqVarDefModalOpen,setEqVarDefModalOpen]=useState<boolean>(false);
+     
+    const {setSnackMessage,setSnackOpen,setSnackSev,snackMessage,snackOpen,snackSev}=useAppContext()
+
+
     return(
         <div
             style={{ height: '100vh', display: 'flex', flexDirection: 'column' ,gap:'10px'}}
         >
             <div>
-                <MenuBar/>
+                <MenuBar
+                    setSnackMessage={setSnackMessage}
+                    setSnackOpen={setSnackOpen}
+                    setSnackSev={setSnackSev}
+                />
             </div>
             <div
                 style={{padding:'5px'}}
@@ -117,6 +127,12 @@ function MunicIndicatorsCreation(){
                     data={viz.data?.equation_vars??[]}
                 />
             </div>
+            <UserSnackCommunication
+                snackMessage={snackMessage}
+                snackSev={snackSev}
+                setSnackOpen={setSnackOpen}
+                snackOpen={snackOpen}
+            />
             <Footer/>
         </div>
     )

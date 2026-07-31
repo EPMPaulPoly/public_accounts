@@ -3,7 +3,6 @@ import type {
     FinStateSecRowWHelp,
 } from "@budgets_municipaux/common"
 import { 
-    Alert, 
     Button, 
     IconButton, 
     MenuItem, 
@@ -11,7 +10,6 @@ import {
     Table, 
     TableBody, 
     TableCell, 
-    TableContainer, 
     TableHead, 
     TableRow, 
     TextField 
@@ -35,6 +33,7 @@ import { serviceReportRows } from "../../services/mun/serviceReportRows"
 import { serviceReportCols } from "../../services/mun/serviceReportCols"
 import { NewReportPageItemModal } from "./NewReportPageItemModal"
 import { authClient } from "../../utils/auth-client"
+import { useAppContext } from "../../context/contextProvider"
 
 interface props {
     editing: boolean
@@ -70,6 +69,7 @@ function ReportPageCreator(props: props) {
     const [newItemModalOpen,setNewItemModalOpen]=useState<boolean>(false);
     const [newItemType,setNewItemType]=useState<'row'|'col'|null>(null)
     const [expanded, setExpanded] = useState<Set<number>>(new Set());
+    const {setSnackOpen,setSnackMessage,setSnackSev}=useAppContext()
     const rowMap = useMemo(() => new Map(props.data.rows.map(r => [r.row_id, r])),[props.data.rows])
     function toggleRow(row: FinStateSecRowWHelp) {
         setExpanded(prev => {
@@ -232,10 +232,14 @@ function ReportPageCreator(props: props) {
                 props.setEditing(true)
                 props.setRowInEdit(newLine.row_id)*/
             } else {
-                alert("Ne peut pas changer d'item sans sauvegarder")
+                setSnackMessage("Ne peut pas changer d'item sans sauvegarder")
+                setSnackSev('error')
+                setSnackOpen(true)
             }
         } else {
-            alert("Choisis une page de rapport pour ajouter des colonne")
+            setSnackMessage("Choisis une page de rapport pour ajouter des colonne")
+            setSnackSev('error')
+            setSnackOpen(true)
         }
     }
 
@@ -260,10 +264,14 @@ function ReportPageCreator(props: props) {
                 props.setEditing(true)
                 props.setColInEdit(newCol.col_id)*/
             } else {
-                alert("Ne peut pas changer d'item sans sauvegarder")
+                setSnackMessage("Ne peut pas changer d'item sans sauvegarder")
+                setSnackSev('info')
+                setSnackOpen(true)
             }
         } else {
-            alert("Choisis une page de rapport pour ajouter des colonne")
+            setSnackMessage("Choisis une page de rapport pour ajouter des colonne")
+            setSnackSev('info')
+            setSnackOpen(true)
         }
     }
 
@@ -291,9 +299,9 @@ function ReportPageCreator(props: props) {
     }
     function handleRowSelect(row_id: number) {
         if (props.editing||!isAdmin) {
-            <Alert>
-                Ne peut pas changer d'item
-            </Alert>
+            setSnackMessage("Ne peut pas change d'item avec item select")
+            setSnackSev('info')
+            setSnackOpen(true)
         } else {
             props.setEditing(true)
             props.onChangeLoc.setRowEdit(row_id)
@@ -305,9 +313,9 @@ function ReportPageCreator(props: props) {
     }
     function handleColSelect(col_id: number) {
         if (props.editing||!isAdmin) {
-            <Alert>
-                Ne peut pas changer d'item
-            </Alert>
+            setSnackMessage("Ne peut pas change d'item avec item select")
+            setSnackSev('info')
+            setSnackOpen(true)
         } else {
             props.setEditing(true)
             props.onChangeLoc.setColEdit(col_id)
@@ -336,10 +344,14 @@ function ReportPageCreator(props: props) {
                         return next;
                     });
                 }else{
-                    alert('erreur lors du changement de parent')
+                    setSnackMessage('erreur lors du changement de parent')
+                    setSnackSev('error')
+                    setSnackOpen(true)
                 }
             }else{
-                alert('Erreur: je n ai pas trouvé la ligne a modifer')
+                setSnackMessage('Erreur: je n ai pas trouvé la ligne a modifer')
+                setSnackSev('error')
+                setSnackOpen(true)
             }
         }
     }

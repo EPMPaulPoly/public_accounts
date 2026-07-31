@@ -6,11 +6,13 @@ import IndicatorsLongTableVisualisation from "../components/visualisation/Indica
 import IndicatorsTransChartVisualisation from "../components/visualisation/IndicatorsTransChartVisualisation";
 import IndicatorsTransTableVisualisation from "../components/visualisation/IndicatorsTransTableVisualisation";
 import { useMunicIndicatorsAnalysisVisualization } from "../hooks/wrappers/MunicIndicsAna/useMunicIndicatorsAnalyseVisualisation";
+import { useAppContext } from "../context/contextProvider";
+import { UserSnackCommunication } from "../components/common/UserSnackCommunication";
 
 
 export default function MunicIndicatorsAnalysis(){
     const viz=useMunicIndicatorsAnalysisVisualization()
-
+    const {setSnackMessage,setSnackOpen,setSnackSev,snackMessage,snackOpen,snackSev}=useAppContext()
     function returnCorrectVis(){
         if(viz.selection.ana_type==='trans'&&viz.selection.ana_view==='table'){
             return(<>
@@ -78,7 +80,11 @@ export default function MunicIndicatorsAnalysis(){
         style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}
     >
         <div>
-            <MenuBar/>
+            <MenuBar
+                setSnackMessage={setSnackMessage}
+                setSnackOpen={setSnackOpen}
+                setSnackSev={setSnackSev}
+            />
         </div>
         <div>
             <IndicatorsAnalysisControlBar
@@ -125,6 +131,12 @@ export default function MunicIndicatorsAnalysis(){
             
             {returnCorrectVis()}
         </div>
+        <UserSnackCommunication
+            snackMessage={snackMessage}
+            snackSev={snackSev}
+            setSnackOpen={setSnackOpen}
+            snackOpen={snackOpen}
+        />
         <Footer/>
     </div>)
 }

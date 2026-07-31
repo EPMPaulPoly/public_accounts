@@ -6,6 +6,7 @@ import {
 import type { UserWithRole } from "better-auth/plugins";
 import type { Dispatch, SetStateAction } from "react";
 import { useAuth } from "../../context/authProvider";
+import { useAppContext } from "../../context/contextProvider";
 
 
 interface UMMProps{
@@ -25,6 +26,7 @@ interface UMMProps{
 }
 
 function UserOpsModal(props:UMMProps){
+    const {setSnackMessage,setSnackSev,setSnackOpen}=useAppContext()
     function handleClose(){
         props.onClicks.setCurrentUser(null);
         props.onClicks.setOpen(false)
@@ -35,13 +37,18 @@ function UserOpsModal(props:UMMProps){
             if (success){
                 handleClose()
             }else{
-                alert('Échec de rétablissement')
+                setSnackMessage('Erreur dans le rétablisseent')
+                setSnackSev('error')
+                setSnackOpen(true)
             }
         }
     }
     function handleImpersonate(){
         if(props.values.currentUser!==null){
             props.onClicks.impersonateUser(props.values.currentUser.id)
+            setSnackMessage('En train de simuler un usager')
+                setSnackSev('info')
+                setSnackOpen(true)
         }
     }
     return(

@@ -7,7 +7,7 @@ import type {
     Revenue 
 } from "@budgets_municipaux/common"
 import { Table, TableCell, TableHead, TableRow , TableBody} from "@mui/material"
-import { useCityYear } from "../../context/contextProvider"
+import { useAppContext } from "../../context/contextProvider"
 
 type section={
     description:string, 
@@ -79,7 +79,7 @@ function ReturnEntryRow({
 export function TableauComptable(
     {sections,montrerSousSection}:entreeTableauComptable
 ){
-    const {year}= useCityYear()
+    const {year}= useAppContext()
     return (
         <>
         {year!==null && sections.every((element)=>element!==null)?

@@ -12,7 +12,7 @@ import ListSubheader from '@mui/material/ListSubheader';
 
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authProvider";
-import { Avatar, Button, Icon } from "@mui/material";
+import type { Dispatch,SetStateAction } from "react";
 import { AccountBox, AdminPanelSettings, Login, Logout } from "@mui/icons-material";
 
 const StyledListHeader = styled(ListSubheader)({
@@ -37,7 +37,13 @@ const adminPages =[
     { label:'Admin', path:'/admin'}
 ]
 
-function MenuBar() {
+interface MenuBarProps{
+    setSnackOpen?:Dispatch<SetStateAction<boolean>>
+    setSnackMessage?:Dispatch<SetStateAction<string>>
+    setSnackSev?: Dispatch<SetStateAction<("success" | "info" | "warning" | "error") | undefined>>
+}
+
+function MenuBar(props:MenuBarProps) {
     const{isAuthenticated,logout,session,isImpersonating,stopImpersonating}=useAuth()
     const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
     const navigate = useNavigate();
@@ -46,7 +52,18 @@ function MenuBar() {
         setAnchorEl(event.currentTarget);
     };
     const closeMenu = () => setAnchorEl(null);
-
+    async function handleLogout(){
+        const {data,error}=await logout()
+        if (error===null&&props.setSnackMessage&&props.setSnackOpen&&props.setSnackSev){
+            props.setSnackMessage('Succès de logout')
+            props.setSnackSev('success')
+            props.setSnackOpen(true)
+        }else if (props.setSnackMessage&&props.setSnackOpen&&props.setSnackSev){
+            props.setSnackMessage(`Erreur de logout: ${error.message}`)
+            props.setSnackSev('error')
+            props.setSnackOpen(true)
+        }
+    } 
     return (
         <AppBar position="static">
             <Toolbar>
@@ -110,7 +127,7 @@ function MenuBar() {
                     
                     {isAuthenticated ?
                         <MenuItem
-                            onClick={logout}
+                            onClick={handleLogout}
                         >
                             <Logout
                             /> Logout

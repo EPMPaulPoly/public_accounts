@@ -15,6 +15,7 @@ import { type ProvincialDataId, type backend_response, type FinStateAssignGrid }
 
 import { serviceReportAssign } from "../../services/mun/serviceReportAssign"
 import {getAssignFromGrid} from '../../utils/gridSearch'
+import { useAppContext } from "../../context/contextProvider"
 
 interface props {
     selection:{
@@ -62,6 +63,7 @@ const sxBox = {
  */
 function ModalProvIdAssign(props: props) {
     const [localCodeStart,setLocalCodeStart]=useState<string>('')
+    const {setSnackOpen,setSnackMessage,setSnackSev}=useAppContext()
     async function handleSectionSave() {
         try {
             const matchId = getAssignFromGrid(props.data,props.selection.rowId, props.selection.colId)
@@ -117,7 +119,9 @@ function ModalProvIdAssign(props: props) {
                 throw new Error("Affectation echouée dans l'api")
              }
         } catch (error: any) {
-            alert(error.message)
+            setSnackMessage(`Erreur:${error.message}`)
+            setSnackSev('error')
+            setSnackOpen(true)
         }
 
     }

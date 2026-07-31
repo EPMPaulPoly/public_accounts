@@ -2,6 +2,7 @@ import { Box, Button, Modal } from "@mui/material";
 import { useState, type Dispatch, type SetStateAction } from "react";
 import UserPasswordWidget from "../userInputs/UserPasswordWidget";
 import { checkPasswordComplexity } from "../../utils/PasswordComplexityCheck";
+import { useAppContext } from "../../context/contextProvider";
 
 interface CPMProps{
     values:{
@@ -21,11 +22,19 @@ function AdminChangePasswordModal(props:CPMProps){
     const passwordValid=checkPasswordComplexity(password)
     const buttonEnabled=passwordValid.digit&&passwordValid.length&&passwordValid.lowercase&&passwordValid.special&&passwordValid.uppercase&&password===passwordConf
 
+    const {setSnackOpen,setSnackMessage,setSnackSev}=useAppContext()
     async function handleChangePassword(){
         if (props.values.modUserId!==null){
             const success= await props.onChange.setUserPwd(props.values.modUserId,password)
             if(success===true){
+                setSnackMessage('Succès')
+                setSnackSev('success')
+                setSnackOpen(true)
                 handleClose()
+            }else{
+                setSnackMessage("Erreur lors de la création de l'usager")
+                setSnackSev('error')
+                setSnackOpen(true)
             }
 
         }

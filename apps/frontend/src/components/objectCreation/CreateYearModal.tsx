@@ -3,6 +3,7 @@ import { useEffect, useState, type Dispatch, type SetStateAction } from "react"
 import { serviceMunicEnt } from "../../services/mun/serviceMunicEntites"
 import type { year } from "@budgets_municipaux/common"
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useAppContext } from "../../context/contextProvider";
 
 interface props{
     open:boolean
@@ -17,7 +18,7 @@ function CreateYearModal({
     const [newYear, setNewYear] = useState<number | "">("");
     const [alertDialogOpen,setAlertDialogOpen] = useState<boolean>(false)
     const [yearToDelete,setYearToDelete]=useState<number|null>(null)
-
+    const {setSnackMessage,setSnackSev,setSnackOpen}=useAppContext()
     function handleClose(){
         setOpen(false)
         setAlertDialogOpen(false)
@@ -30,7 +31,9 @@ function CreateYearModal({
                 setYear(newYearConf.data[0])
                 setOpen(false)
             }else{
-                alert('Issue during creation')
+                setSnackMessage('Issue during creation')
+                setSnackSev('error')
+                setSnackOpen(true)
             }
         }
     }
@@ -52,7 +55,9 @@ function CreateYearModal({
                 setAlertDialogOpen(false)
                 setYearToDelete(null)
             }else{
-                alert('Échec de suppression')
+                setSnackMessage('Échec de suppression')
+                setSnackSev('error')
+                setSnackOpen(true)
             }
         }
     }

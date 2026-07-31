@@ -2,6 +2,7 @@ import { Box, Button, Modal } from "@mui/material"
 import type { UserWithRole } from "better-auth/plugins"
 import { useEffect, useState, type Dispatch, type SetStateAction } from "react"
 import UserRoleWidget from "../userInputs/UserRoleWidget"
+import { useAppContext } from "../../context/contextProvider"
 
 interface MURMProps{
     open:boolean,
@@ -12,6 +13,7 @@ interface MURMProps{
 
 function ModUserRoleModal(props:MURMProps){
     const [role,setRole] = useState<'admin'|'user'>('user')
+    const {setSnackMessage,setSnackSev,setSnackOpen}=useAppContext()
     useEffect(()=>{
         if (props.open){
             const current =props.currentUser?.role==='user'||props.currentUser?.role==='admin'?props.currentUser.role:'user' as 'user'|'admin' 
@@ -22,8 +24,16 @@ function ModUserRoleModal(props:MURMProps){
     async function handleRoleChangeSave (){
         const success = await props.onSave(role)
         if (success){
+
+            setSnackMessage('Changement rôle réussi')
+            setSnackSev('success')
+            setSnackOpen(true) 
             props.setOpen(false)
-        }else{alert('Échec lors du changement de rôle')}
+        }else{
+            setSnackMessage('Échec lors du changement de rôle')
+            setSnackSev('error')
+            setSnackOpen(true) 
+        }
     }
 
     function handleRoleChange(newRole:string){

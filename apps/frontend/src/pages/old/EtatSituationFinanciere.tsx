@@ -1,6 +1,6 @@
 import ChoixVilleAnnee from "../../components/selectors/ChoixVilleAnnee";
 import MenuBar from "../../components/common/MenuBar";
-import { useCityYear } from "../../context/contextProvider";
+import { useAppContext } from "../../context/contextProvider";
 import { UseESFCityYearChange } from "../../hooks/old/UseESFCityYearChange";
 import TableESF from "../../components/visualisation/TableESF";
 import { useEffect, useState } from "react";
@@ -8,7 +8,7 @@ import type { year } from "@budgets_municipaux/common";
 import { serviceMunicEnt } from "../../services/mun/serviceMunicEntites";
 
 function EtatSituationFinanciere(){
-    const {municipality,year,setMunicipality,setYear}=useCityYear()
+    const {municipality,year,setMunicipality,setYear}=useAppContext()
     const [yearOptions,setYearOptions]= useState<year[]>([])
     const {data,handleYearCityChange} = UseESFCityYearChange()
     // Get data is city year are known

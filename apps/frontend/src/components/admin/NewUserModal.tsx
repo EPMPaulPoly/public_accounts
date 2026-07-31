@@ -7,6 +7,7 @@ import { type User } from "better-auth";
 import { type UserWithRole } from "better-auth/plugins"
 import { authClient } from "../../utils/auth-client"
 import { checkPasswordComplexity } from "../../utils/PasswordComplexityCheck"
+import { useAppContext } from "../../context/contextProvider"
 
 interface NUMProps{
     open:boolean,
@@ -58,12 +59,19 @@ function NewUserModal(props:NUMProps){
         setUserNew(blankUser)
         props.setOpen(false)
     }
+
+    const {setSnackOpen,setSnackMessage,setSnackSev}=useAppContext()
     async function handleCreateNewUser(){
         const success = await props.createUser(userNew.name,userNew.username,userNew.email,userNew.password,userNew.role)
         if (success){
+            setSnackMessage('Nouvel utilisateur créé')
+            setSnackSev('success')
+            setSnackOpen(true)
             handleClose()
         }else{
-            alert('Erreur lors de la création')
+            setSnackMessage('Erreur lors de la création')
+            setSnackSev('error')
+            setSnackOpen(true)
         }
     }
 

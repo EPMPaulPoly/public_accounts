@@ -2,34 +2,56 @@ import { createContext, useContext, useState } from "react";
 import type { Dispatch,SetStateAction } from "react";
 import type { municipalite } from "@budgets_municipaux/common";
 
-type CityYearContextType = {
+type AppContextType = {
     municipality: municipalite | null;
     year: number | null;
+    snackOpen:boolean,
+    snackMessage:string,
+    snackSev:("success" | "info" | "warning" | "error") | undefined,
     setMunicipality: Dispatch<SetStateAction<municipalite | null>>;
     setYear: Dispatch<SetStateAction<number | null>>;
+    setSnackOpen:Dispatch<SetStateAction<boolean>>
+    setSnackMessage:Dispatch<SetStateAction<string>>
+    setSnackSev:Dispatch<SetStateAction<("success" | "info" | "warning" | "error") | undefined>>
 };
 
-const CityYearContext = createContext<CityYearContextType | undefined>(
+const AppContext = createContext<AppContextType | undefined>(
     undefined
 );
 
-export function CityYearProvider({
+export function AppContextProvider({
     children
 }: {
     children: React.ReactNode;
 }) {
     const [municipality, setMunicipality] = useState<municipalite | null>(null);
     const [year, setYear] = useState<number | null>(null);
-    const value_out = {municipality,year,setMunicipality,setYear}
+
+    const [snackOpen,setSnackOpen] = useState<boolean>(false)
+    const [snackMessage,setSnackMessage] = useState<string>('')
+    const [snackSev,setSnackSev] = useState<("success" | "info" | "warning" | "error") | undefined>(undefined)
+
+    const value_out = {
+        municipality,
+        year,
+        snackOpen,
+        snackMessage,
+        snackSev,
+        setMunicipality,
+        setYear,
+        setSnackMessage,
+        setSnackOpen,
+        setSnackSev
+    }
     return (
-        <CityYearContext.Provider value={value_out}>
+        <AppContext.Provider value={value_out}>
             {children}
-        </CityYearContext.Provider>
+        </AppContext.Provider>
     );
 }
 
-export function useCityYear() {
-    const context = useContext(CityYearContext);
+export function useAppContext() {
+    const context = useContext(AppContext);
 
     if (!context) {
         throw new Error("useCityYear must be used within CityYearProvider");

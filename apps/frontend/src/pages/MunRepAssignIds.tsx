@@ -12,6 +12,8 @@ import ModalProvIdAssign from "../components/objectCreation/ModalProvIdAssign";
 import CopyAssignmentsModal from "../components/objectCreation/CopyAssignmentsModal";
 import { useReportAssignVisualization } from "../hooks/wrappers/MunRepAssignIds/useReportAssignVisualization";
 import { Footer } from "../components/common/Footer";
+import { useAppContext } from "../context/contextProvider";
+import { UserSnackCommunication } from "../components/common/UserSnackCommunication";
 
 export default function ReportSetup() {
 
@@ -55,10 +57,16 @@ export default function ReportSetup() {
         }
     ])
     const viz = useReportAssignVisualization()
+
+    const{snackOpen,setSnackOpen,setSnackMessage,setSnackSev,snackMessage,snackSev}=useAppContext()
     return (
         <div style={{flexDirection:'column',overflow:'hidden',display:'flex',height:'100vh'}}>
             <div>
-                <MenuBar />
+                <MenuBar 
+                    setSnackMessage={setSnackMessage}
+                    setSnackOpen={setSnackOpen}
+                    setSnackSev={setSnackSev}
+                />
             </div>
             <div>
                 <DataAssignmentMenu
@@ -147,6 +155,12 @@ export default function ReportSetup() {
                     yearOptions={viz.options?.year_opts??[]}
                 />
             </div>
+            <UserSnackCommunication
+                snackMessage={snackMessage}
+                snackSev={snackSev}
+                setSnackOpen={setSnackOpen}
+                snackOpen={snackOpen}
+            />
             <Footer/>
         </div>
     )

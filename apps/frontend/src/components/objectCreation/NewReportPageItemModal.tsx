@@ -3,6 +3,7 @@ import { Box, Button, MenuItem, Modal, Select, TextField } from "@mui/material";
 import { useState, type Dispatch, type SetStateAction } from "react";
 import  { serviceReportRows } from "../../services/mun/serviceReportRows";
 import { serviceReportCols } from "../../services/mun/serviceReportCols";
+import { useAppContext } from "../../context/contextProvider";
 
 interface props{
     modalOpen:boolean
@@ -21,6 +22,7 @@ interface props{
 export function NewReportPageItemModal(props:props){
     const [newItemName,setNewItemName]=useState<string>('')
     const [newItemParent,setNewItemParent]=useState<number|null>(null)
+    const {setSnackMessage,setSnackSev,setSnackOpen}=useAppContext()
     async function handleCreate(){
         if (props.itemType==='row'&&props.reportPage!==null){
             const data = await serviceReportRows.newLine(newItemName,props.reportPage,newItemParent)
@@ -28,7 +30,9 @@ export function NewReportPageItemModal(props:props){
                 props.setRows(data.data)
                 handleClose()
             }else{
-                alert("Échec lors de la création d'une nouvel ligne")
+                setSnackMessage("Échec lors de la création d'une nouvel ligne")
+                setSnackSev('error')
+                setSnackOpen(true)
             }
         }
         if (props.itemType==='col'&&props.reportPage!==null){
@@ -37,7 +41,9 @@ export function NewReportPageItemModal(props:props){
                 props.setCols(data.data)
                 handleClose()
             }else{
-                alert("Échec lors de la création d'une nouvel colonne")
+                setSnackMessage("Échec lors de la création d'une nouvel colonne")
+                setSnackSev('error')
+                setSnackOpen(true)
             }
         }
     }

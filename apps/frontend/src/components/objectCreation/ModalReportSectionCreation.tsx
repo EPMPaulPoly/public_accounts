@@ -4,6 +4,7 @@ import { serviceReportParts } from "../../services/mun/serviceReportParts"
 import type { backend_response, FinStateSecColWHelp, FinStateSecRowWHelp, FinStateSection } from "@budgets_municipaux/common"
 import { serviceReportRows } from "../../services/mun/serviceReportRows"
 import { serviceReportCols } from "../../services/mun/serviceReportCols"
+import { useAppContext } from "../../context/contextProvider"
 
 interface props{
     values:{
@@ -31,6 +32,7 @@ const sxBox = {
 function ModalReportSectionModCreate(props:props){
     const [descSection,setDescSection]=useState<string>('')
     const [secName,setSecName]=useState<string>('')
+    const {setSnackMessage,setSnackOpen,setSnackSev}=useAppContext()
     async function handleSectionSave (){
         
         if (!props.values.newPart&&props.values.reportPageToMod!==null&&props.values.reportPageToMod.part_id!==null){
@@ -39,7 +41,9 @@ function ModalReportSectionModCreate(props:props){
                 props.onChange.setReportPage(props.values.reportPageToMod.part_id)
                 props.onChange.setModalOpen(false)
             }else if(returnVal.success===false){
-                alert('erreur en modifiant une section')
+                setSnackMessage('erreur en modifiant une section')
+                setSnackSev('error')
+                setSnackOpen(true)
             }
         }else if (props.values.newPart){
             const returnVal = await serviceReportParts.createNewPart(descSection,secName)
@@ -47,10 +51,14 @@ function ModalReportSectionModCreate(props:props){
                 props.onChange.setReportPage(returnVal.data[0].part_id)
                 props.onChange.setModalOpen(false)
             }else if(returnVal.success===false){
-                alert('erreur en créant une nouvelle section')
+                setSnackMessage('erreur en créant une nouvelle section')
+                setSnackSev('error')
+                setSnackOpen(true)
             }
         }else{
-            alert("Combinaison invalide d'intrants")
+            setSnackMessage("Combinaison invalide d'intrants")
+            setSnackSev('error')
+            setSnackOpen(true)
         }
     }
     // When the modal opens set the valus of the requiired fields.

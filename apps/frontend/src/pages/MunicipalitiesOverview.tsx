@@ -11,6 +11,8 @@ import { Box } from "@mui/material"
 import { useMunicipalitiesVisualization } from "../hooks/wrappers/MunicipalitiesOverview/useMunicipalitiesVisualisation"
 import { ChooseRegion } from "../components/selectors/ChooseRegion"
 import { Footer } from "../components/common/Footer"
+import { useAppContext } from "../context/contextProvider"
+import { UserSnackCommunication } from "../components/common/UserSnackCommunication"
 
 function MunicipalitiesOverview(){
     const [dateModalOpen,setDateModalOpen] = useState<boolean>(false)
@@ -101,11 +103,22 @@ function MunicipalitiesOverview(){
 
     const viz=useMunicipalitiesVisualization()
 
-
+    const {
+        setSnackMessage,
+        setSnackSev,
+        setSnackOpen,
+        snackMessage,
+        snackOpen,
+        snackSev
+    }=useAppContext()
 
     return(
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
-        <MenuBar/>
+        <MenuBar
+            setSnackMessage={setSnackMessage}
+            setSnackSev={setSnackSev}
+            setSnackOpen={setSnackOpen}
+        />
         <div style={{verticalAlign:'center',justifyContent:'center'}}>
             <Box
                 sx={{
@@ -171,6 +184,12 @@ function MunicipalitiesOverview(){
                 }}
             />
         </div>
+        <UserSnackCommunication
+                        snackMessage={snackMessage}
+                        snackSev={snackSev}
+                        setSnackOpen={setSnackOpen}
+                        snackOpen={snackOpen}
+                    />
         <Footer/>
     </div>
     )

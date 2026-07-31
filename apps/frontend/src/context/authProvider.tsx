@@ -1,7 +1,7 @@
 // src/components/AuthProvider.tsx
 import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 import { authClient } from '../utils/auth-client'
-
+import { useAppContext } from './contextProvider'
 
 interface AuthContextType {
     session: {
@@ -21,8 +21,8 @@ interface AuthContextType {
     } | null
     isLoading: boolean
     isAuthenticated: boolean
-    login: (email: string, password: string) => Promise<{ data: any; error: any }>
-    logout: () => Promise<void>
+    login: (email: string, password: string) => Promise<{ data: any, error: any}>
+    logout: () => Promise<{ data: any, error: any}>
     isImpersonating:boolean
     stopImpersonating:()=>Promise<void>
     refreshSession:()=>Promise<void>
@@ -33,7 +33,7 @@ const AuthContext = createContext<AuthContextType>({} as any)
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [session, setSession] = useState<any | null>(null)
     const [isLoading, setIsLoading] = useState(true)
-
+    const {setSnackOpen,setSnackMessage,setSnackSev}=useAppContext()
     const fetchSession = useCallback(async () => {
         try {
             const { data } = await authClient.getSession()
@@ -78,8 +78,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }, [])
 
     const logout = async () => {
-        await authClient.signOut()
+        const {data,error}= await authClient.signOut()
         setSession(null)
+        return {data,error}
     }
 
     const isImpersonating = !!session?.session?.impersonatedBy        
@@ -88,7 +89,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const {data,error}= await authClient.admin.stopImpersonating()
         await refreshSession()
         if (error){
-            alert('error when revoking impersonation')
+            setSnackMessage('error when revoking impersonation')
+            setSnackSev('error')
+            setSnackOpen(true)
         }
     }
 

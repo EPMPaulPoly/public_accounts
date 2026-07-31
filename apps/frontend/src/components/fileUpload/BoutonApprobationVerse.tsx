@@ -6,6 +6,7 @@ import type {
     mappingLine, 
     mappingPoint 
 } from "@budgets_municipaux/common"
+import { useAppContext } from "../../context/contextProvider" 
 
 interface PropsBoutApprobVersement{
     modalOuvert: boolean,
@@ -28,6 +29,7 @@ interface PropsBoutApprobVersement{
 }
 
 function BoutonApprobationVerse(props:PropsBoutApprobVersement){
+    const {setSnackMessage,setSnackOpen,setSnackSev,snackSev,snackOpen,snackMessage}=useAppContext()
     const handleFileInsert=async ()=>{
         try{
             const regularMapping = Object.values(props.champsARemplir)
@@ -84,24 +86,34 @@ function BoutonApprobationVerse(props:PropsBoutApprobVersement){
 
                 response = await props.serviceMAJ(props.idFichier,regularMapping,props.table,props.annee,cartoMapping)
                 if (response.success=== true){
-                    alert(`Inséré ${response.data}`)
+                    setSnackMessage(`Inséré ${response.data}`)
+                    setSnackSev('success')
+                    setSnackOpen(true)
                     props.defModalOuvert(false)
                 } else{
-                    alert(`Erreur inconnue`)
+                    setSnackMessage(`Erreur inconnue`)
+                    setSnackSev('error')
+                    setSnackOpen(true)
                 }
 
             }else{
                 response = await props.serviceMAJ(props.idFichier,regularMapping,props.table,props.annee)
                 if (response.success=== true){
-                    alert(`Inséré ${response.data}`)
+                    setSnackMessage(`Inséré ${response.data}`)
+                    setSnackSev('success')
+                    setSnackOpen(true)
                     props.defModalOuvert(false)
                 } else{
-                    alert(`Erreur inconnue`)
+                    setSnackMessage(`Erreur inconnue`)
+                    setSnackSev('error')
+                    setSnackOpen(true)
                 }
             }
 
         } catch(err:any){
-            alert('Erreur Versement')
+            setSnackMessage('Erreur Versement')
+            setSnackSev('error')
+            setSnackOpen(true)
         }
     }
     const lineGeomCheck =(entree:EquivalenceCSVCoordPoint):boolean=>{

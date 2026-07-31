@@ -13,6 +13,8 @@ import ModUserRoleModal from "../components/admin/ModUserRoleModal";
 import BanUserModal from "../components/admin/BanUserModal";
 import AdminChangePasswordModal from "../components/admin/AdminChangePasswordModal";
 import { setPassword } from "better-auth/api";
+import { UserSnackCommunication } from "../components/common/UserSnackCommunication";
+import { useAppContext } from "../context/contextProvider";
 
 
 
@@ -44,9 +46,13 @@ function AdminPage(){
     const [modUserRoleOpen,setModUserRoleOpen] = useState<boolean>(false);
     const [banUserModalOpen,setBanUserModalOpen] = useState<boolean>(false)
     const [changePasswordModalOpen,setChangePasswordModalOpen]=useState<boolean>(false)
-
+    const {setSnackOpen,setSnackMessage,setSnackSev,snackMessage,snackOpen,snackSev}=useAppContext()
     return(<>
-        <MenuBar/>
+        <MenuBar
+            setSnackOpen={setSnackOpen}
+            setSnackMessage={setSnackMessage}
+            setSnackSev={setSnackSev}
+        />
         <div>
             <AdminPageControlBar
                 onClick={{
@@ -123,7 +129,14 @@ function AdminPage(){
                     setUserPwd:changePassword
                 }}
             />
+        
         </div>
+        <UserSnackCommunication
+            snackMessage={snackMessage}
+            snackOpen={snackOpen}
+            snackSev={snackSev}
+            setSnackOpen={setSnackOpen}
+        />
         <Footer/>
     </>)
 }

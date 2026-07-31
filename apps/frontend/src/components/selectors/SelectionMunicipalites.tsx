@@ -2,7 +2,7 @@ import { type backend_response, type FinStateSection, type FinStateValueGrid, ty
 import { Button, FormControl, InputLabel, Menu, MenuItem, Select } from "@mui/material"
 import { useEffect, useState, type Dispatch, type SetStateAction } from "react"
 import { serviceMunicEnt } from "../../services/mun/serviceMunicEntites"
-import { useCityYear } from "../../context/contextProvider"
+import { useAppContext } from "../../context/contextProvider"
 import { serviceReportData } from "../../services/mun/serviceData"
 interface props{
     municipalities:municipalite[]
@@ -25,7 +25,8 @@ interface props{
 
 
 export function SelectionMunicipalites(props:props){
-    const{year,municipality,setMunicipality} = useCityYear()
+    
+    const{year,municipality,setMunicipality,setSnackMessage,setSnackSev,setSnackOpen} = useAppContext()
     useEffect(()=>{
         const fetchData = async()=>{
             if ((props.admLev==='cm'||props.admLev==='mrc'||props.admLev==='reg')&&(year!==null)){
@@ -38,7 +39,9 @@ export function SelectionMunicipalites(props:props){
                         props.setPage(0)
                     }
                 }else{
-                    alert('erreur en récupérant régions')
+                    setSnackMessage('erreur en récupérant régions')
+                    setSnackSev('error')
+                    setSnackOpen(true)
                 }
             }
         }
@@ -54,7 +57,9 @@ export function SelectionMunicipalites(props:props){
                 props.setRegionOptions(data.data)
                 props.setSubRegion(null)
             }else{
-                alert('erreur en récupérant régions')
+                setSnackMessage('erreur en récupérant régions')
+                setSnackSev('error')
+                setSnackOpen(true)
             }
 
 

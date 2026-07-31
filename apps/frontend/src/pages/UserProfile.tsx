@@ -4,16 +4,14 @@ import MenuBar from "../components/common/MenuBar";
 import UserProfilePanel from "../components/visualisation/UserProfilePanel";
 import UserChangePasswordModal from "../components/objectCreation/UserChangePasswordModal";
 import UserChangeInfoModal from "../components/objectCreation/UserChangeInfoModal";
-import { Alert, Snackbar, type AlertColor, type AlertPropsColorOverrides } from "@mui/material";
+import { useAppContext } from "../context/contextProvider";
+import { UserSnackCommunication } from "../components/common/UserSnackCommunication";
 
 
 function UserProfile(){
     const [changeInfoModalOpen,setChangeInfoModalOpen]=useState<boolean>(false)
     const [changePasswordModalOpen,setChangePasswordModalOpen]=useState<boolean>(false)
-    const [snackOpen,setSnackOpen] = useState<boolean>(false)
-    const [snackMesssage,setSnackMessage] = useState<string>('')
-    const [snackSev,setSnackSev] = useState<("success" | "info" | "warning" | "error") | undefined>(undefined)
-    const [failMessage,setFailMessage] = useState<string>('')
+    const {snackOpen,snackMessage,snackSev,setSnackMessage,setSnackOpen,setSnackSev}=useAppContext()
     return (
     <div
         style={{
@@ -50,16 +48,12 @@ function UserProfile(){
                 setSnackSev={setSnackSev}
             />
         </div>
-        <Snackbar open={snackOpen} autoHideDuration={6000} onClose={()=>setSnackOpen(false)}>
-            <Alert
-                onClose={()=>setSnackOpen(false)}
-                severity={snackSev}
-                variant="filled"
-                sx={{ width: '100%' }}
-            >
-                {snackMesssage}
-            </Alert>
-        </Snackbar>
+        <UserSnackCommunication
+            snackMessage={snackMessage}
+            snackOpen={snackOpen}
+            snackSev={snackSev}
+            setSnackOpen={setSnackOpen}
+        />
         
         <Footer/>
     </div>)

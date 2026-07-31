@@ -1,5 +1,6 @@
 import { Box, Button, FormControl, InputLabel, MenuItem, Modal, Select, TextField } from "@mui/material"
 import { useState, type Dispatch, type SetStateAction } from "react"
+import { useAppContext } from "../../context/contextProvider"
 
 interface BUMProps{
     open:boolean,
@@ -13,6 +14,7 @@ function BanUserModal(props:BUMProps){
     const [units,setUnits] = useState<number>(60)
     const [time,setTime] = useState<number>(0)
     const [reason,setReason] = useState<string>('Disruption équations')
+    const {setSnackMessage,setSnackSev,setSnackOpen}=useAppContext()
     function handleClose(){
         props.setOpen(false)
     }
@@ -21,13 +23,20 @@ function BanUserModal(props:BUMProps){
             const success = await props.onBan(props.currentId,reason,time*units)
             if (success){
                 props.setCurrentId(null)
+                setSnackMessage('Banissement réussi')
+                setSnackSev('info')
+                setSnackOpen(true)
                 handleClose()
             }
             else{
-                alert('Banissement échoué')
+                setSnackMessage('Banissement échoué')
+                setSnackSev('error')
+                setSnackOpen(true)
             }
         }else{
-            alert('identifiant non défini')
+            setSnackMessage('Identifiant non reconnu')
+                setSnackSev('error')
+                setSnackOpen(true)
         }
     }
     return(<>
