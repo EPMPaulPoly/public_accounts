@@ -155,7 +155,7 @@ export type FinStateAssignGrid=FinStateSecRowSibs&{
 
 export type FinStateSecValueWithDesc=FinStateSecAssignWDesc&{
     cod_geo:number
-    value:number,
+    value:number|null,
     value_text:string
 }
 

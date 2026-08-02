@@ -1,6 +1,11 @@
-import { FinStateSecValueSibs, } from "@budgets_municipaux/common";
+import { 
+    FinStateSecValueSibs, 
+    FinStateValueGrid, 
+} from "@budgets_municipaux/common";
 
-export function reshapeDataHelper(result: FinStateSecValueSibs[]) {
+export function reshapeDataHelper(
+    result: FinStateSecValueSibs[]
+):FinStateValueGrid[] {
     const rows = Object.values(
         result.reduce((acc, cell) => {
             const key = cell.row_id;

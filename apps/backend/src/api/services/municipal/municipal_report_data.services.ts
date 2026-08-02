@@ -7,6 +7,8 @@ import { getMatchesQuery,getGridMatchesQuery } from "../../repositories/municipa
 import { getDataValGridRepo, getProvIdQuery } from "../../repositories/municipal/munic_report_data.repositories";
 import { reshapeDataHelper } from "../../../utils/reshapeDataHelper";
 import { addRowSiblings } from "../../../utils/addSiblingsRows";
+import { rollUpChildValuesOnNull } from "../../../utils/rollupChildValuesOnNull";
+
 class ReportDataService {
     async getProvIds(year?:number,limit?:number,offset?:number,search_string?:string) {
         console.log("→ getProvIds called")
@@ -25,7 +27,8 @@ class ReportDataService {
         const rawData = await getDataValGridRepo(db,code_geo,year,part_id)
         const wSibs= addRowSiblings(rawData) as unknown as FinStateSecValueSibs[]
         const grid = reshapeDataHelper(wSibs)
-        return grid
+        const gridRollup = rollUpChildValuesOnNull(grid)
+        return gridRollup
     }
 }
 
