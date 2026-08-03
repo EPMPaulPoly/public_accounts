@@ -14,3 +14,8 @@ There are 3 main parts to the setup:
 - a frontend
 - a backend
 - a common types package which is used in order to share the definitions of a few variables
+
+
+## Getting started
+
+See the [getting started page](docs/getting_started.md)
