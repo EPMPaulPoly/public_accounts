@@ -26,6 +26,7 @@ export type EqVarWDesc=EquationVar&{
 }
 
 export type EquationVarData=EquationVar&{
+    prov_rep_id:string,
     year:number,
     cod_geo:number,
     value:number

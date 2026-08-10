@@ -39,7 +39,8 @@ export function reformatEqPrecursorForCalc(
             col_id: cell.col_id,
             cod_geo: cell.cod_geo,
             year: cell.year,
-            value: cell.value
+            value: cell.value,
+            prov_rep_id:cell.prov_rep_id
         });
 
         group.scope[cell.eq_var_symbol] = cell.value;
