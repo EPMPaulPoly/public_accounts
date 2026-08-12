@@ -1,33 +1,30 @@
 import { Kysely } from 'kysely'
-import { Database } from '../src/db/types'
+import { Database } from '../db/types'
 
 export async function up(db: Kysely<Database>): Promise<void> {
     await db.schema
             .withSchema('municipal_qc')
-            .createTable('data')
+            .createTable('columns_table')
             .addColumn(
-                'data_id',
+                'col_id',
                 'serial',
                 col=>col.primaryKey()
-            ).addColumn(
-                'prov_rep_id',
-                'varchar'
-            ).addColumn(
-                'year',
+            )
+            .addColumn(
+                'part_id',
                 'integer',
                 col=>col
                 .notNull()
-                .references('municipal_qc.year_table.year')
-                .onDelete('cascade')
-            ).addColumn(
-                'value',
-                'numeric'
-            ).execute()
+                .references('municipal_qc.report_parts.part_id')
+                .onDelete('cascade'))
+            .addColumn('column_desc','varchar')
+            .addColumn('column_order','integer')
+            .execute()
 }
 
 export async function down(db: Kysely<Database>): Promise<void> {
     await db.schema
             .withSchema('municipal_qc')
-            .dropTable('data')
+            .dropTable('columns_table')
             .execute()
 }
