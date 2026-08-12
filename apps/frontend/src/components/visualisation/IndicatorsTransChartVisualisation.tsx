@@ -1,8 +1,6 @@
 import type { EquationCalcResult, EquationDef } from "@budgets_municipaux/common";
+import  {Bar} from 'react-chartjs-2'
 
-import { BarChart } from "@mui/icons-material";
-
-import { Chart as ChartPlot, Bar } from 'react-chartjs-2'
 interface ITCVprops {
     equation: EquationDef,
     data: EquationCalcResult[],
@@ -37,8 +35,7 @@ export default function IndicatorsTransChartVisualisation(props: ITCVprops) {
             ...dude
         }
         return (<>
-            <ChartPlot
-                type={'bar'}
+            <Bar
                 data={reformattedData}
                 options={{
                     responsive: true,
@@ -92,7 +89,7 @@ export default function IndicatorsTransChartVisualisation(props: ITCVprops) {
                                 font:{
                                     size:20,
                                 },
-                                callback: (value) =>
+                                callback: (value:any) =>
                                     new Intl.NumberFormat('fr-CA', {
                                         maximumFractionDigits: 0,
                                     }).format(Number(value)) + '$',
