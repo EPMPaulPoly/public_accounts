@@ -1,7 +1,7 @@
 import type { EquationCalcResult, EquationDef } from "@budgets_municipaux/common";
 
 
-import { Chart as ChartPlot } from 'react-chartjs-2'
+import  { Line} from 'react-chartjs-2'
 interface ITCVprops {
     equation: EquationDef,
     data: EquationCalcResult[]
@@ -62,8 +62,7 @@ export default function IndicatorsLongChartVisualisation(props: ITCVprops) {
             ...dude
         }
         return (<>
-            <ChartPlot
-                type={'line'}
+            <Line
                 data={reformattedData}
                 options={{
                     responsive: true,
@@ -117,7 +116,7 @@ export default function IndicatorsLongChartVisualisation(props: ITCVprops) {
                                 font: {
                                     size: 20,
                                 },
-                                callback: (value) =>
+                                callback: (value:any) =>
                                     new Intl.NumberFormat('fr-CA', {
                                         maximumFractionDigits: 0,
                                     }).format(Number(value)) + '$',
