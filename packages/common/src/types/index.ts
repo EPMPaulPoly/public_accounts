@@ -3,8 +3,8 @@ export type {
     city_year_combo,
     regions,
     year
- } from "./entities";
-export type {backend_response} from "./api";
+ } from "./entities.js";
+export type {backend_response} from "./api.js";
 export type {
     ProfitAndLossStatement,
     Revenue,
@@ -33,7 +33,7 @@ export type {
     FinStateSecValueWithDesc,
     FinStateSecValueWLev,
     FinStateSecValueSibs
-} from './accounting';
+} from './accounting.js';
 
 export type{
     EquationCalcRow,
@@ -44,15 +44,15 @@ export type{
     EquationVarData,
     EquationCalcFormatted,
     EquationCalcResult
-}from './equations'
+}from './equations.js'
 export type{
     AnalysisType,
     AnalysisView
-} from './analysis'
+} from './analysis.js'
 export type {
     node,
     link
-} from './sankey'
+} from './sankey.js'
 
 export type{
     FileDBEquivalence,
@@ -62,4 +62,4 @@ export type{
     ColumnGeometryPoint,
     ColumnGeometryLine,
     EquivalenceCSVCoordPoint
-} from './fileUpload'
+} from './fileUpload.js'

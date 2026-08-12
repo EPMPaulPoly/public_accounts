@@ -2,8 +2,8 @@
   "compilerOptions": {
     "composite": true,
     "declaration": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "outDir": "dist",
     "strict": true,
     "skipLibCheck": true,
