@@ -32,8 +32,8 @@ class MunicipalitiesServices {
                 no_limit_query = no_limit_query.where('municipal_qc.municipalities.cod_mrc','=',String(region_id))
             }
             if(region_type==='reg'&& isFinite(Number(region_id))){
-                limit_query = limit_query.where('municipal_qc.municipalities.no_reg','=',String(region_id))
-                no_limit_query = no_limit_query.where('municipal_qc.municipalities.no_reg','=',String(region_id))
+                limit_query = limit_query.where('municipal_qc.municipalities.no_reg','=',Number(region_id))
+                no_limit_query = no_limit_query.where('municipal_qc.municipalities.no_reg','=',Number(region_id))
             }
         }
         if (pop_gt && typeof Number(pop_gt) ==='number'){
