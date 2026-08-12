@@ -2,7 +2,6 @@ import {
     Outlet,
     Navigate     
 } from "react-router"
-import { authClient } from "./auth-client";
 import { useAuth } from "../context/authProvider";
 
 function UserProtectedRoute () {

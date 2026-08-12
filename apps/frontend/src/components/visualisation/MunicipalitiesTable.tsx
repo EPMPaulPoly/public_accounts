@@ -78,7 +78,7 @@ function MunicipalitiesTable(props: newProps) {
                     count={props.data.totalCount}
                     page={props.value.page}
                     rowsPerPage={props.value.rows_per_page}
-                    onPageChange={(e, newPage) => props.onChange.page_changer(newPage)}
+                    onPageChange={(e, newPage) => {e;props.onChange.page_changer(newPage)}}
                     onRowsPerPageChange={(e) => {
                         props.onChange.rows_per_page_changer(parseInt(e.target.value, 10));
                     }}

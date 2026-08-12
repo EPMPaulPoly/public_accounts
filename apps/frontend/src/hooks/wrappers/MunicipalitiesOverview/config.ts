@@ -1,4 +1,4 @@
-import type { municipalite } from "@budgets_municipaux/common";
+
 import type { VisualizationConfig } from "../../visualisation/types";
 import { serviceMunicEnt } from "../../../services/mun/serviceMunicEntites";
 import type { municipalitiesViewData, municipalitiesViewOptions, municipalitiesViewSelection } from "./types";

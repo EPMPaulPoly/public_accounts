@@ -1,5 +1,5 @@
 
-import axios, { type AxiosResponse } from "axios";
+import axios from "axios";
 import api from "../api";
 
 import { type Dispatch,type  SetStateAction } from "react";

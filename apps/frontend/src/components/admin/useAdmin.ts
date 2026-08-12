@@ -1,7 +1,7 @@
 import type { UserWithRole } from "better-auth/plugins"
 import { useEffect, useState } from "react"
 import { authClient } from "../../utils/auth-client"
-import { useNavigate, useNavigation } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useAuth } from "../../context/authProvider"
 
 
@@ -70,7 +70,7 @@ const useAdmin =()=>{
     } 
     async function getCurrentUser(){
         if (modUserId!==null){
-            const {data,error} = await authClient.admin.getUser({query:{id:modUserId}})
+            const {data} = await authClient.admin.getUser({query:{id:modUserId}})
             setCurrentUserEdit(data)
         }else{
             setCurrentUserEdit(null)
@@ -78,7 +78,7 @@ const useAdmin =()=>{
     }
 
     async function createUser(name:string,username:string,email:string,password:string,role:'user'|'admin'){
-        const {data,error}= await authClient.admin.createUser({name:name,email:email,role:role,password:password,data:{username:username}})
+        const {error}= await authClient.admin.createUser({name:name,email:email,role:role,password:password,data:{username:username}})
         if (error===null){
             getUsers()
             return true
@@ -88,7 +88,7 @@ const useAdmin =()=>{
 
     async function updateRole(role:string){
         if(modUserId!==null &&(role==='user'||role==='admin')){
-            const {data,error} = await authClient.admin.setRole({userId: modUserId,role:role})
+            const {error} = await authClient.admin.setRole({userId: modUserId,role:role})
             if (error===null){
                 getUsers()
                 return true
@@ -98,7 +98,7 @@ const useAdmin =()=>{
     }
 
     async function banUser(userId:string,reason:string,time:number){
-        const {data,error} = await authClient.admin.banUser({userId:userId,banReason:reason,banExpiresIn:time})
+        const {error} = await authClient.admin.banUser({userId:userId,banReason:reason,banExpiresIn:time})
         if (error===null){
             getUsers()
             getCurrentUser()
@@ -108,7 +108,7 @@ const useAdmin =()=>{
     }
 
     async function unBanUser(userId:string){
-        const {data,error} = await authClient.admin.unbanUser({userId})
+        const {error} = await authClient.admin.unbanUser({userId})
         if (error===null){
             getUsers()
             getCurrentUser()
@@ -118,7 +118,7 @@ const useAdmin =()=>{
     }
 
     async function deleteUser(userId:string){
-        const {data,error}= await authClient.admin.removeUser({userId})
+        const {error}= await authClient.admin.removeUser({userId})
         if(error===null){
             setModUserId(null)
             getUsers()
@@ -127,7 +127,7 @@ const useAdmin =()=>{
         return false
     }
     async function impersonateUser(userId:string){
-        const {data,error} = await authClient.admin.impersonateUser({userId})
+        const {error} = await authClient.admin.impersonateUser({userId})
         if(error===null){
             await refreshSession()
             navigate('/')
@@ -136,7 +136,7 @@ const useAdmin =()=>{
         }
     }
     async function changePassword(userId:string,password:string){
-        const {data,error}=await authClient.admin.setUserPassword({newPassword:password,userId:userId})
+        const {error}=await authClient.admin.setUserPassword({newPassword:password,userId:userId})
         if (error===null){
             return true
         }else{

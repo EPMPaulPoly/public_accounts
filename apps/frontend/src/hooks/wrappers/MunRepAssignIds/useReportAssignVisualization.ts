@@ -1,5 +1,5 @@
 
-import type { backend_response, FinStateAssignGrid, FinStateSecColWHelp, FinStateSecRowWHelp, FinStateSection, ProvincialDataId, year } from "@budgets_municipaux/common";
+import type { backend_response, FinStateAssignGrid, FinStateSection, ProvincialDataId, year } from "@budgets_municipaux/common";
 import { useVisualization } from "../../visualisation/useVisualisation";
 import { reportSetupConfig } from "./config";
 import { useEffect } from "react";
@@ -133,7 +133,7 @@ export function useReportAssignVisualization() {
         }));
     }
     function overrideGrid(rows: FinStateAssignGrid[]) {
-        viz.updateData(data => ([
+        viz.updateData(() => ([
             ...rows]
         ));
     }

@@ -1,9 +1,6 @@
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, IconButton, Input, InputLabel, MenuItem, Modal, Select, Table, TableBody, TableCell, TableHead, TableRow, TextField } from "@mui/material"
-import { useEffect, useState, type Dispatch, type SetStateAction } from "react"
-import { serviceMunicEnt } from "../../services/mun/serviceMunicEntites"
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, InputLabel, MenuItem, Modal, Select } from "@mui/material"
+import { useState, type Dispatch, type SetStateAction } from "react"
 import type { year } from "@budgets_municipaux/common"
-import DeleteIcon from '@mui/icons-material/Delete';
-import { Form } from "react-router-dom";
 import { serviceReportAssign } from "../../services/mun/serviceReportAssign";
 
 interface props{

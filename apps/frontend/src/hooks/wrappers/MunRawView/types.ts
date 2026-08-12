@@ -1,4 +1,4 @@
-import type { FinStateAssignGrid, FinStateSecColWHelp, FinStateSecRowWHelp, FinStateSection, FinStateValueGrid, municipalite, ProvincialDataId, regions, year } from "@budgets_municipaux/common"
+import type {  FinStateSection, municipalite, regions, year } from "@budgets_municipaux/common"
 
 export interface reportRawViewSelection{
     report_page:number|null

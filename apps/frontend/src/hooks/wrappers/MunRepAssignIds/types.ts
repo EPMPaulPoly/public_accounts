@@ -1,4 +1,4 @@
-import type { FinStateAssignGrid, FinStateSecColWHelp, FinStateSecRowWHelp, FinStateSection, ProvincialDataId, year } from "@budgets_municipaux/common"
+import type { FinStateAssignGrid, FinStateSection, ProvincialDataId, year } from "@budgets_municipaux/common"
 
 export interface reportAssignSelection{
     part_id:number|null,

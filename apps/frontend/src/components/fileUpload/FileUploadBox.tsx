@@ -1,5 +1,4 @@
 import {  useState, type Dispatch, type SetStateAction } from "react";
-import { ServiceGeoJson } from "../../services/common/serviceGeoJson";
 import { Divider, LinearProgress } from "@mui/material";
 
 export interface PropsFileUploadBox{

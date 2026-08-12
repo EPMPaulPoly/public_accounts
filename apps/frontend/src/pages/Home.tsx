@@ -1,4 +1,4 @@
-import { useState } from "react"
+
 import MenuBar from "../components/common/MenuBar"
 import { Footer } from "../components/common/Footer"
 import { UserSnackCommunication } from "../components/common/UserSnackCommunication"
