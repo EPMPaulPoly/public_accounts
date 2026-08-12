@@ -42,6 +42,7 @@ const out3=addColHelperColumns(newCol)
 //console.table(move3)
 //const move4=moveColHelper(out2,7,'right')
 //console.table(move4)
-const add5=newColHelper(cols,newCol)
+const newCol2={col_id:-1,column_desc:'new',part_id:1,column_order:-1}
+const add5=newColHelper(cols,newCol2)
 console.table(add5)
 console.log('done')
