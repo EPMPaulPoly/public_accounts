@@ -133,8 +133,8 @@ class ServiceIndicatorEquation{
     }
     async deleteEquations(eq_id:number){
         try {
-
-            return {success:true}
+            const data = await api.delete(`/munic/indicators/equation/${eq_id}`)
+            return {success:data.data.success}
         } catch (error:any) {
             return {success:false}
         }
