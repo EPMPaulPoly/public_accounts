@@ -2,10 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Home from './pages/Home' 
 import './App.css'
-import EtatResultatNet from './pages/old/EtatResultatsNet'
-import EtatSituationFinanciere from './pages/old/EtatSituationFinanciere';
 import { AppContextProvider } from './context/contextProvider';
-import { AnalyseDesDepenses } from './pages/old/AnalyseDesDepenses';
 import MunicipalitiesOverview  from './pages/MunicipalitiesOverview';
 import MunRepTemplateAndData from './pages/MunRepTemplateAndData';
 import ReportSetup from './pages/MunRepAssignIds';
@@ -45,9 +42,6 @@ function App() {
 					<Route path='/munic/fin-state' element={<MunicipalAccountRawView/>}/>
 					<Route path='/munic/indics-create' element={<MunicIndicatorsCreation/>}/>
 					<Route path='/munic/indics-ana' element={<MunicIndicatorsAnalysis/>}/>
-					<Route path="/ern" element={<EtatResultatNet/>}/>
-					<Route path="/esf" element={<EtatSituationFinanciere/>}/>
-					<Route path='/dep1' element={<AnalyseDesDepenses/>}/>
 					<Route element={<UserProtectedRoute/>}>
 						<Route path='/profil' element={<UserProfile/>}/>
 					</Route>
