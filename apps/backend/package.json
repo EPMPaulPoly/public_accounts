@@ -7,13 +7,13 @@
     "dev": "tsx watch --inspect=0.0.0.0:9229 src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "migration:create": "tsx scripts/create-migration.ts",
-    "migrate": "tsx scripts/migrate.ts",
-    "rollback": "tsx scripts/rollback.ts",
+    "migration:create": "tsx src/scripts/create-migration.ts",
+    "migrate": "tsx src/scripts/migrate.ts",
+    "rollback": "tsx src/scripts/rollback.ts",
     "test": "vitest",
     "test:debug": "npx --inspect-brk ../../node_modules/vitest/vitest.mjs run",
     "scratch:debug": "tsx --inspect=0.0.0.0:9229 src/scratch.ts",
-    "create:user":"tsx scripts/createUser.ts"
+    "create:user":"tsx src/scripts/createUser.ts"
   },
   "keywords": [],
   "author": "Paul Charbonneau",

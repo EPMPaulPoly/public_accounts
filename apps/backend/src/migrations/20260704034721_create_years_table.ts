@@ -1,18 +1,17 @@
 import { Kysely } from 'kysely'
-import { Database } from '../src/db/types'
+import { Database } from '../db/types'
 
 export async function up(db: Kysely<Database>): Promise<void> {
     await db.schema
         .withSchema('municipal_qc')
-        .alterTable('municipalities')
-        .addColumn('nom_cm','varchar')
+        .createTable('year_table')
+        .addColumn('year','integer',col=>col.primaryKey())
         .execute()
 }
 
 export async function down(db: Kysely<Database>): Promise<void> {
     await db.schema
         .withSchema('municipal_qc')
-        .alterTable('municipalities')
-        .dropColumn('nom_cm')
+        .dropTable('year_table')
         .execute()
 }

@@ -1,5 +1,5 @@
 import { Kysely } from 'kysely'
-import { Database } from '../src/db/types'
+import { Database } from '../db/types'
 
 export async function up(db: Kysely<Database>): Promise<void> {
     const action= db.schema
