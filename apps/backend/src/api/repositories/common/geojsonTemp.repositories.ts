@@ -1,11 +1,11 @@
 import { Feature } from "geojson";
 import fs from "fs";
-import path from "path";
 import { parser,} from "stream-json";
-import{ pick } from "stream-json/filters/pick.js";
+import { pick } from "stream-json/filters/pick.js";
 import { streamArray } from "stream-json/streamers/stream-array.js";
-import {Client, PoolClient} from 'pg';
-import { TMP_DIR,MAX_AGE_MS } from "./fileOptions.repositories";
+import { PoolClient} from 'pg';
+import { TMP_DIR } from "./fileOptions.repositories";
+import { chain } from "stream-chain";
 export type MulterRequest = Request & {
   file?: Express.Multer.File;
 };
@@ -21,11 +21,14 @@ export async function peekGeojsonColumns(filePath: string): Promise<string[]> {
         let done = false;
 
         const fileStream = fs.createReadStream(filePath);
-        const jsonParser = parser();
-        const pickFeatures = pick({ filter: "features" }); // pick the top-level 'features' array
-        const featureStream = streamArray();
 
-        featureStream.on("data", ({ value }: { value: Feature }) => {
+        const pipeline = chain([
+            parser(),
+            pick.asStream({ filter: "features" }),
+            streamArray.asStream(),
+        ]);
+
+        pipeline.on("data", ({ value }: { value: Feature }) => {
             if (!done && value.properties) {
                 Object.keys(value.properties).forEach((k) => columnsSet.add(k));
                 done = true;
@@ -34,15 +37,15 @@ export async function peekGeojsonColumns(filePath: string): Promise<string[]> {
             }
         });
 
-        featureStream.on("end", () => {
+        pipeline.on("end", () => {
             if (!done) resolve(Array.from(columnsSet));
         });
 
-        featureStream.on("error", reject);
+        pipeline.on("error", reject);
         fileStream.on("error", reject);
 
         // pipe through parser -> pick 'features' -> stream array
-        fileStream.pipe(jsonParser).pipe(pickFeatures).pipe(featureStream);
+        fileStream.pipe(pipeline);
     });
 }
 
@@ -60,12 +63,12 @@ export async function insertGeojsonFile(
 
         await dbClient.query(`DELETE from ${tableName}`);
         fileStream = fs.createReadStream(filePath);
-        const jsonParser = parser();
-        const pickFeatures = pick({ filter: "features" });
-        const featureStream = streamArray();
-
-        // Use async iterator to avoid overlapping inserts
-        const pipeline = fileStream.pipe(jsonParser).pipe(pickFeatures).pipe(featureStream);
+        const pipeline = chain([
+            parser(),
+            pick.asStream({ filter: "features" }),
+            streamArray.asStream(),
+        ]);
+        fileStream.pipe(pipeline)
         for await (const { value } of pipeline) {
             if (!value.properties) continue;
 
