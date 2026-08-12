@@ -28,7 +28,7 @@ interface props {
 }
 
 function ManipReportParts(props: props) {
-    const { data: session, isPending } = authClient.useSession();
+    const { data: session } = authClient.useSession();
   
     const isAdmin = session?.user.role === 'admin';
     const [open, setOpen] = useState<boolean>(false)
@@ -37,7 +37,7 @@ function ManipReportParts(props: props) {
     }
     async function handleDeletePart() {
         if (props.value.selected_part_id!==null){
-            const deletedItem=await serviceReportParts.deleteReportParts(props.value.selected_part_id)
+            await serviceReportParts.deleteReportParts(props.value.selected_part_id)
             props.onChange.part_id_changer(null)
             setOpen(false)
         }

@@ -1,4 +1,4 @@
-import type { backend_response, EquationDef, EquationVar, EqVarWDesc, FinStateSecColWHelp, FinStateSecRowWHelp, FinStateSection } from "@budgets_municipaux/common";
+import type { backend_response, EquationDef, EqVarWDesc, FinStateSecColWHelp, FinStateSecRowWHelp, FinStateSection } from "@budgets_municipaux/common";
 import { serviceIndicatorEquation } from "../../../services/mun/serviceMunicIndicators";
 import type { VisualizationConfig } from "../../visualisation/types";
 import type { 

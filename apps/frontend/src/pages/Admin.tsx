@@ -1,8 +1,6 @@
-import { userSchema } from "better-auth";
+
 import MenuBar from "../components/common/MenuBar";
-import { authClient } from "../utils/auth-client";
-import { useEffect, useState } from "react";
-import type { UserWithRole } from "better-auth/plugins";
+import { useState } from "react";
 import { Footer } from "../components/common/Footer";
 import UserTable from "../components/admin/UserTable";
 import AdminPageControlBar from "../components/admin/AdminPageControlBar";
@@ -12,7 +10,6 @@ import NewUserModal from "../components/admin/NewUserModal";
 import ModUserRoleModal from "../components/admin/ModUserRoleModal";
 import BanUserModal from "../components/admin/BanUserModal";
 import AdminChangePasswordModal from "../components/admin/AdminChangePasswordModal";
-import { setPassword } from "better-auth/api";
 import { UserSnackCommunication } from "../components/common/UserSnackCommunication";
 import { useAppContext } from "../context/contextProvider";
 

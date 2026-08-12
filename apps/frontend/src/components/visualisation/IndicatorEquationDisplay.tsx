@@ -14,7 +14,7 @@ interface eqDispProps{
 
 export function IndicatorEquationDisplay(props: eqDispProps) {
     const eqToDisp = props.options.find((e) => e.eq_id === props.values) ?? { eq_name: '', eq_expression: '', eq_id: -1 }
-    const { data: session, isPending } = authClient.useSession();
+    const { data: session } = authClient.useSession();
                   
     const isUser = session?.user.role === 'user'||session?.user.role==='admin';
     return (<>

@@ -3,9 +3,6 @@ import { useState, type Dispatch, type SetStateAction } from "react"
 import UserInfoWidget from "../userInputs/UserInfoWidget"
 import UserPasswordWidget from "../userInputs/UserPasswordWidget"
 import UserRoleWidget from "../userInputs/UserRoleWidget"
-import { type User } from "better-auth";
-import { type UserWithRole } from "better-auth/plugins"
-import { authClient } from "../../utils/auth-client"
 import { checkPasswordComplexity } from "../../utils/PasswordComplexityCheck"
 import { useAppContext } from "../../context/contextProvider"
 

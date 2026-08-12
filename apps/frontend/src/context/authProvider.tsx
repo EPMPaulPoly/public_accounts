@@ -86,7 +86,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const isImpersonating = !!session?.session?.impersonatedBy        
     
     const stopImpersonating = async ()=>{
-        const {data,error}= await authClient.admin.stopImpersonating()
+        const {error}= await authClient.admin.stopImpersonating()
         await refreshSession()
         if (error){
             setSnackMessage('error when revoking impersonation')

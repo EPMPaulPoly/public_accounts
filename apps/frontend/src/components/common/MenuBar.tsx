@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 
 import ListSubheader from '@mui/material/ListSubheader';
 
@@ -33,9 +33,7 @@ const municipalPages = [
 //    { label: "État de la Situtation Financière", path: "/esf" },
 //    { label: "Analyse des dépenses", path:"/dep1"    }
 ]
-const adminPages =[
-    { label:'Admin', path:'/admin'}
-]
+
 
 interface MenuBarProps{
     setSnackOpen?:Dispatch<SetStateAction<boolean>>
@@ -53,7 +51,7 @@ function MenuBar(props:MenuBarProps) {
     };
     const closeMenu = () => setAnchorEl(null);
     async function handleLogout(){
-        const {data,error}=await logout()
+        const {error}=await logout()
         if (error===null&&props.setSnackMessage&&props.setSnackOpen&&props.setSnackSev){
             props.setSnackMessage('Succès de logout')
             props.setSnackSev('success')

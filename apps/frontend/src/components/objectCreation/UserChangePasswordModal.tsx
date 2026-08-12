@@ -1,4 +1,4 @@
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Modal, TextField } from "@mui/material"
+import { Box, Button, Modal, TextField } from "@mui/material"
 import { useState, type Dispatch, type SetStateAction } from "react"
 import UserPasswordWidget from "../userInputs/UserPasswordWidget"
 import { checkPasswordComplexity } from "../../utils/PasswordComplexityCheck"
@@ -46,7 +46,7 @@ function UserChangePasswordModal(props:UCPMProps){
     async function handlePasswordChange(){
         const userId=session?.user.id
         if (userId&&isOldPwdValid&&isNewPwdValid){
-            const {data,error}=await authClient.changePassword({newPassword:newPwd,currentPassword:oldPwd})
+            const {error}=await authClient.changePassword({newPassword:newPwd,currentPassword:oldPwd})
             
             if (error===null){
                 props.setSnackOpen(true)

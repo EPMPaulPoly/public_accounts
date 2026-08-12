@@ -1,4 +1,4 @@
-import type { backend_response, municipalite, ProvincialDataId } from "@budgets_municipaux/common"
+import type { backend_response, ProvincialDataId } from "@budgets_municipaux/common"
 import api from "../api"
 
 class ServiceReportData{

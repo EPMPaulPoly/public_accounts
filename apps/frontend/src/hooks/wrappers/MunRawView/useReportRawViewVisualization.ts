@@ -1,9 +1,8 @@
 
-import type { backend_response,  FinStateSection, FinStateValueGrid, regions, year } from "@budgets_municipaux/common";
+import type { backend_response,  FinStateSection, FinStateValueGrid, year } from "@budgets_municipaux/common";
 import { useVisualization } from "../../visualisation/useVisualisation";
 import { reportRawViewConfig, } from "./config";
 import { useEffect } from "react";
-import { serviceReportData } from "../../../services/mun/serviceData";
 import { serviceMunicEnt } from "../../../services/mun/serviceMunicEntites";
 import { serviceReportParts } from "../../../services/mun/serviceReportParts";
 

@@ -1,4 +1,4 @@
-import type { FinStateSecColWHelp, FinStateSecRowWHelp, FinStateSection, year,FinStateAssignGrid } from "@budgets_municipaux/common";
+import type {  FinStateSection, year  } from "@budgets_municipaux/common";
 import { Box, Button } from "@mui/material";
 import type { Dispatch, SetStateAction } from "react";
 import ChooseYear from "../selectors/ChooseYear";
@@ -27,7 +27,7 @@ interface props{
 }
 
 export default function  DataAssignmentMenu(props:props){
-    const { data: session, isPending } = authClient.useSession();
+    const { data: session  } = authClient.useSession();
           
     const isAdmin = session?.user.role === 'admin';
     

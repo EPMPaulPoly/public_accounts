@@ -1,9 +1,7 @@
 import Button from "@mui/material/Button"
-import { useState, type Dispatch, type SetStateAction } from "react"
+import {  type Dispatch, type SetStateAction } from "react"
 interface props{
-    dateModalOpen:boolean,
     setDateModalOpen:Dispatch<SetStateAction<boolean>>
-    uploadMunicModalOpen:boolean,
     setUploadMunicModalOpen:Dispatch<SetStateAction<boolean>>
 }
 import { authClient } from "../../utils/auth-client"
@@ -11,13 +9,11 @@ import { authClient } from "../../utils/auth-client"
 
 function UploadMunicipalititesManagement(
     {
-        dateModalOpen,
         setDateModalOpen,
-        uploadMunicModalOpen,
         setUploadMunicModalOpen
     }:props
 ){
-    const { data: session, isPending } = authClient.useSession();
+    const { data: session } = authClient.useSession();
   
     const isAdmin = session?.user.role === 'admin';
     return(

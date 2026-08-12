@@ -5,7 +5,6 @@ import {
 } from "@mui/material";
 import type { UserWithRole } from "better-auth/plugins";
 import type { Dispatch, SetStateAction } from "react";
-import { useAuth } from "../../context/authProvider";
 import { useAppContext } from "../../context/contextProvider";
 
 

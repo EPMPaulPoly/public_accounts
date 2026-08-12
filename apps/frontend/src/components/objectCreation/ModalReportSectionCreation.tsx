@@ -1,9 +1,7 @@
-import { Box, Button, Dialog, Modal, TextField } from "@mui/material"
+import { Box, Button, Dialog, TextField } from "@mui/material"
 import { useEffect, useState, type Dispatch, type SetStateAction } from "react"
 import { serviceReportParts } from "../../services/mun/serviceReportParts"
-import type { backend_response, FinStateSecColWHelp, FinStateSecRowWHelp, FinStateSection } from "@budgets_municipaux/common"
-import { serviceReportRows } from "../../services/mun/serviceReportRows"
-import { serviceReportCols } from "../../services/mun/serviceReportCols"
+import type { FinStateSection } from "@budgets_municipaux/common"
 import { useAppContext } from "../../context/contextProvider"
 
 interface props{

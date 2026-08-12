@@ -1,11 +1,8 @@
-import { type regions, type FinStateSection, type FinStateValueGrid, type municipalite, type year } from "@budgets_municipaux/common"
+import { type regions, type FinStateSection, type municipalite, type year } from "@budgets_municipaux/common"
 import { Box } from "@mui/material"
-import { useState, type Dispatch, type SetStateAction } from "react"
 import ChooseYear from "../selectors/ChooseYear"
 import ChooseReportSection from "../selectors/ChooseReportSection"
-import { useAppContext } from "../../context/contextProvider"
 import ChooseCity from "../selectors/ChooseCity"
-import { SelectionMunicipalites } from "../selectors/SelectionMunicipalites"
 import { ChooseRegion } from "../selectors/ChooseRegion"
 
 

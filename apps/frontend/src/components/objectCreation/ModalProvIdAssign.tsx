@@ -10,7 +10,7 @@ import {
     TableHead, 
     TablePagination, 
     TableRow, TextField } from "@mui/material"
-import { useState, type Dispatch, type SetStateAction } from "react"
+import { useState } from "react"
 import { type ProvincialDataId, type backend_response, type FinStateAssignGrid } from "@budgets_municipaux/common"
 
 import { serviceReportAssign } from "../../services/mun/serviceReportAssign"
@@ -203,7 +203,7 @@ function ModalProvIdAssign(props: props) {
                             count={props.selection.totalCount??0}
                             page={props.selection.tablePage??0}
                             rowsPerPage={props.selection.rowPerPage}
-                            onPageChange={(e, newPage) => handlePageChange(newPage)}
+                            onPageChange={(e, newPage) => {e;handlePageChange(newPage)}}
                             onRowsPerPageChange={(e) => {
                                 handleChangeRowsPerPage(parseInt(e.target.value, 10));
                             }}

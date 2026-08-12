@@ -1,9 +1,6 @@
-import type { backend_response, FinStateSection, regions, year } from "@budgets_municipaux/common";
+
 import { useVisualization } from "../../visualisation/useVisualisation";
 import { municipalitiesViewConfig } from "./config";
-import { useEffect } from "react";
-import { serviceMunicEnt } from "../../../services/mun/serviceMunicEntites";
-import { serviceReportParts } from "../../../services/mun/serviceReportParts";
 
 export function useMunicipalitiesVisualization() {
 

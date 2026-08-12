@@ -1,4 +1,4 @@
-import type { EquationVar, EqVarWDesc, FinStateSecColWHelp, FinStateSecRowWHelp, FinStateSection } from "@budgets_municipaux/common";
+import type { EqVarWDesc, FinStateSecColWHelp, FinStateSecRowWHelp, FinStateSection } from "@budgets_municipaux/common";
 import { Edit } from "@mui/icons-material";
 import { Button, IconButton, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import type { Dispatch, SetStateAction } from "react";
@@ -35,7 +35,7 @@ export default function IndicatorVariablesDisplay(props: IVDprops) {
         props.onEdit.setModifiedVar(var_id)
         props.onEdit.setModalOpen(true)
     }
-    const { data: session, isPending } = authClient.useSession();
+    const { data: session} = authClient.useSession();
                       
     const isUser = session?.user.role === 'user'||session?.user.role==='admin';
     return (<>
