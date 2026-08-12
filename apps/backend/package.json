@@ -13,7 +13,7 @@
     "test": "vitest",
     "test:debug": "npx --inspect-brk ../../node_modules/vitest/vitest.mjs run",
     "scratch:debug": "tsx --inspect=0.0.0.0:9229 src/scratch.ts",
-    "create:user":"tsx src/scripts/createUser.ts"
+    "create:user": "tsx src/scripts/createUser.ts"
   },
   "keywords": [],
   "author": "Paul Charbonneau",
@@ -21,26 +21,24 @@
   "type": "module",
   "dependencies": {
     "@budgets_municipaux/common": "^1.0.0",
-    "@types/multer": "^2.2.0",
-    "@types/pg": "^8.20.0",
     "better-auth": "^1.6.25",
     "cors": "^2.8.6",
     "csv-parser": "^3.2.1",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "knex": "^3.3.0",
     "kysely": "^0.29.2",
     "mathjs": "^15.2.0",
     "multer": "^2.2.0",
     "pg": "^8.22.0",
     "stream-json": "^3.4.0",
-    "tsc": "^2.0.4",
     "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
+    "@types/multer": "^2.2.0",
     "@types/node": "^26.1.0",
+    "@types/pg": "^8.21.0",
     "kysely-ctl": "^0.21.0",
     "ts-node-dev": "^2.0.0",
     "tsx": "^4.23.0",
