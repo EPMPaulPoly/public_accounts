@@ -1,9 +1,13 @@
 import multer from "multer";
-import { peekGeojsonColumns,  insertGeojsonFile,MulterRequest } from "../../repositories/common/geojsonTemp.repositories";
+import { 
+    peekGeojsonColumns,  
+    insertGeojsonFile,
+    MulterRequest 
+} from "../../repositories/common/geojsonTemp.repositories.js";
 import { 
     cleanupOldTempFiles,
     TMP_DIR
-} from '../../repositories/common/fileOptions.repositories'
+} from '../../repositories/common/fileOptions.repositories.js'
 import { PoolClient,Pool } from "pg";
 import path from "path";
 import {Request,Response} from 'express';

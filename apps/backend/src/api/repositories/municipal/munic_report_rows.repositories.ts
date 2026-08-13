@@ -1,7 +1,7 @@
 import { FinStateSectionRow } from "@budgets_municipaux/common";
 import { Kysely, sql, Transaction } from "kysely";
-import { Database } from "../../../db/types";
-import { addRowHelperColumns } from "../../../utils";
+import { Database } from "../../../db/types.js";
+import { addRowHelperColumns } from "../../../utils/index.js";
 
 
 export const upsertReportRowsTransact = async (

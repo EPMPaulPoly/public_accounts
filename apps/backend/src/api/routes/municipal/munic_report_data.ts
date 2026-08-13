@@ -1,9 +1,13 @@
 import { Router } from 'express'
-import { MatchesGridQuerySchema, MatchesQuerySchema } from '../../validators/municipal/munic_data_matches.validators'
-import { validate } from '../../middleware/validate'
-import { DataProvIdQuerySchema, GetDataGridScheme } from '../../validators/municipal/munic_report_data.validators'
-import { getDataGridCont, getProvIds } from '../../controllers/municipal/municipal_report_data.controller'
-import { requireAuth, requireRole } from '../../middleware/auth'
+import { validate } from '../../middleware/validate.js'
+import { 
+    DataProvIdQuerySchema, 
+    GetDataGridScheme 
+} from '../../validators/municipal/munic_report_data.validators.js'
+import { 
+    getDataGridCont, 
+    getProvIds 
+} from '../../controllers/municipal/municipal_report_data.controller.js'
 
 const MunicReportDataRouter=()=>{
 

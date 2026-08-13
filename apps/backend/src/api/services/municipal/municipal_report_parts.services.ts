@@ -1,7 +1,7 @@
-import { Database } from "../../../db/types";
-import { Kysely, sql } from "kysely";
-import { db } from "../../../db/db";
-import { municPartRepository } from "../../repositories/municipal/munic_report_parts.repositories";
+
+import { sql } from "kysely";
+import { db } from "../../../db/db.js";
+import { municPartRepository } from "../../repositories/municipal/munic_report_parts.repositories.js";
 class ReportPartsService {
     async getReportParts() {
 

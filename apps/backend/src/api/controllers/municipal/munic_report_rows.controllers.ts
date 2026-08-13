@@ -1,7 +1,6 @@
-import { Request, RequestHandler, Response, Router } from 'express'
-import { reportPartsService } from '../../services/municipal/municipal_report_parts.services'
-import { reportRowsService } from '../../services/municipal/municipal_report_rows.services'
-import { addRowHelperColumns } from '../../../utils'
+import { Request, RequestHandler, Response } from 'express'
+import { reportRowsService } from '../../services/municipal/municipal_report_rows.services.js'
+import { addRowHelperColumns } from '../../../utils/index.js'
 
 
 

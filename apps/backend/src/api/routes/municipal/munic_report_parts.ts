@@ -1,8 +1,18 @@
 import { Router } from 'express'
-import { createReportPart, deleteReportParts, getReportParts, modifyReportPart } from '../../controllers/municipal/munic_report_parts.controllers'
-import { ReportPartCreateSchema, ReportPartDeleteSchema, ReportPartModifySchema, ReportPartQuerySchema } from '../../validators/municipal/munic_report_parts.validators'
-import { validate } from '../../middleware/validate'
-import { requireAuth, requireRole } from '../../middleware/auth'
+import { 
+    createReportPart, 
+    deleteReportParts, 
+    getReportParts, 
+    modifyReportPart 
+} from '../../controllers/municipal/munic_report_parts.controllers.js'
+import { 
+    ReportPartCreateSchema, 
+    ReportPartDeleteSchema, 
+    ReportPartModifySchema, 
+    ReportPartQuerySchema 
+} from '../../validators/municipal/munic_report_parts.validators.js'
+import { validate } from '../../middleware/validate.js'
+import { requireAuth, requireRole } from '../../middleware/auth.js'
 
 export const MunicReportPartsRouter=()=>{
 

@@ -1,5 +1,5 @@
 import { Request, RequestHandler, Response, Router } from 'express'
-import { serviceReportMatches } from '../../services/municipal/municipal_report_matches.services'
+import { serviceReportMatches } from '../../services/municipal/municipal_report_matches.services.js'
 
 export const getMatchesCont: RequestHandler = async (req: Request, res: Response, next) => {
     try {

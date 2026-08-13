@@ -1,5 +1,5 @@
 import { role } from "better-auth/plugins";
-import { auth } from "../utils/auth";
+import { auth } from "../utils/auth.js";
 // Database connection
 
 async function createUser() {

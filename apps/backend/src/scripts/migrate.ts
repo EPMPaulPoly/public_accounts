@@ -1,6 +1,6 @@
-import { db } from '../db/db'
-import { createMigrator } from '../db/migrationProvider'
-import { auth } from '../utils/auth'
+import { db } from '../db/db.js'
+import { createMigrator } from '../db/migrationProvider.js'
+import { auth } from '../utils/auth.js'
 import { getMigrations } from 'better-auth/db/migration'
 
 async function run() {

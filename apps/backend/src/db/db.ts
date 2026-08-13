@@ -16,7 +16,7 @@ dotenv.config({
   path: path.resolve(__dirname, '../../../../.env'),
 })
 
-import { Database } from './types'
+import { Database } from './types.js'
 
 
 console.log("DB CONFIG:", {

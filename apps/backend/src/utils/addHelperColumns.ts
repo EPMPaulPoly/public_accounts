@@ -1,7 +1,21 @@
-import type { FinStateSecColWHelp, FinStateSecRowWHelp, FinStateSectionCol, FinStateSectionRow } from "@budgets_municipaux/common";
-import { addColLevelEditFlagFields, addRowLevelEditFlagFields } from "./addLevelEditFlagFields";
-import { addColMoveFlagField, addRowMoveFlagField } from "./addMoveFlagFIelds";
-import { addColNextSibling, addColPrevSibling, addColSiblings, addRowNextSibling, addRowPrevSibling, addRowSiblings } from "./addSiblingsRows";
+import type { 
+    FinStateSecColWHelp, 
+    FinStateSecRowWHelp, 
+    FinStateSectionCol, 
+    FinStateSectionRow 
+} from "@budgets_municipaux/common";
+import { 
+    addColLevelEditFlagFields, 
+    addRowLevelEditFlagFields 
+} from "./addLevelEditFlagFields.js";
+import { 
+    addColMoveFlagField, 
+    addRowMoveFlagField 
+} from "./addMoveFlagFields.js";
+import { 
+    addColSiblings,
+    addRowSiblings 
+} from "./addSiblingsRows.js";
 
 export function addRowHelperColumns(cleanRows:FinStateSectionRow[]):FinStateSecRowWHelp[]{
     const inter1=addRowLevelEditFlagFields(cleanRows)
