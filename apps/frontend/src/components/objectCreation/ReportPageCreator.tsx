@@ -141,17 +141,28 @@ function ReportPageCreator(props: props) {
 
     async function handleDelete() {
         if (props.selection.RowEdit!== null) {
-            await serviceReportRows.deleteRow(props.selection.RowEdit)
-
-            props.onChangeLoc.setRowEdit(null)
-            props.setEditing(false)
-            props.forceDataUpdate()
+            const result= await serviceReportRows.deleteRow(props.selection.RowEdit)
+            if (result.success===true){
+                props.onChangeLoc.setRowEdit(null)
+                props.setEditing(false)
+                props.forceDataUpdate()
+            } else{
+                setSnackMessage('Deleting report row failed')
+                setSnackSev('error')
+                setSnackOpen(true)
+            }
         }
         if (props.selection.ColEdit !== null) {
-            await serviceReportCols.deleteCol(props.selection.ColEdit)
-            props.onChangeLoc.setColEdit(null)
-            props.setEditing(false)
-            props.forceDataUpdate()
+            const result=await serviceReportCols.deleteCol(props.selection.ColEdit)
+            if (result.success===true){
+                props.onChangeLoc.setColEdit(null)
+                props.setEditing(false)
+                props.forceDataUpdate()
+            }else{
+                setSnackMessage('Deleting report column failed')
+                setSnackSev('error')
+                setSnackOpen(true)
+            }
         }
     }
     async function handleMoveUp() {

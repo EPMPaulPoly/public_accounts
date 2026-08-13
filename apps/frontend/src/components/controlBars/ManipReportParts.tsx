@@ -8,6 +8,7 @@ import { useState, type Dispatch, type SetStateAction } from "react";
 import { serviceReportParts } from "../../services/mun/serviceReportParts";
 import ChooseReportSection from "../selectors/ChooseReportSection";
 import { authClient } from "../../utils/auth-client";
+import { useAppContext } from "../../context/contextProvider";
 
 
 interface props {
@@ -29,7 +30,7 @@ interface props {
 
 function ManipReportParts(props: props) {
     const { data: session } = authClient.useSession();
-  
+    const { setSnackMessage, setSnackOpen, setSnackSev }=useAppContext()
     const isAdmin = session?.user.role === 'admin';
     const [open, setOpen] = useState<boolean>(false)
     function handleClose() {
@@ -37,9 +38,15 @@ function ManipReportParts(props: props) {
     }
     async function handleDeletePart() {
         if (props.value.selected_part_id!==null){
-            await serviceReportParts.deleteReportParts(props.value.selected_part_id)
-            props.onChange.part_id_changer(null)
-            setOpen(false)
+            const result = await serviceReportParts.deleteReportParts(props.value.selected_part_id)
+            if (result.success===false){
+                props.onChange.part_id_changer(null)
+                setOpen(false)
+            }else{
+                setSnackMessage('Error in deleting report part')
+                setSnackSev('error')
+                setSnackOpen(true)
+            }
         }
     }
     return (
