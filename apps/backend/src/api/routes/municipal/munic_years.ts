@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { createYears, deleteYears, getYears } from '../../controllers/municipal/munic_years.controllers'
-import { requireAuth, requireRole } from '../../middleware/auth'
+import { createYears, deleteYears, getYears } from '../../controllers/municipal/munic_years.controllers.js'
+import { requireAuth, requireRole } from '../../middleware/auth.js'
 
 export const MunicYearsRouter=()=>{
     

@@ -1,5 +1,5 @@
 import { betterAuth } from "better-auth";
-import { db } from "../db/db";
+import { db } from "../db/db.js";
 import { admin, username } from "better-auth/plugins"
 import 'dotenv'
 

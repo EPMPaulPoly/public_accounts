@@ -1,8 +1,8 @@
 import { RequestHandler, Router } from "express";
 import { Pool } from "pg";
 
-import { importFile, runFileUpload } from "../../services/common/geojsonGest.services";
-import { requireAuth, requireRole } from "../../middleware/auth";
+import { importFile, runFileUpload } from "../../services/common/geojsonGest.services.js";
+import { requireAuth, requireRole } from "../../middleware/auth.js";
 
 
 export const creationRouteurDonnees = (pool: Pool): Router => {

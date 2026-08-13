@@ -1,7 +1,7 @@
 import { Kysely, sql, Transaction } from "kysely";
-import { Database } from "../../../db/types";
+import { Database } from "../../../db/types.js";
 import { FinStateSectionCol } from "@budgets_municipaux/common";
-import { addColHelperColumns } from "../../../utils";
+import { addColHelperColumns } from "../../../utils/index.js";
 
 export const upsertReportColsTransact = async (
     db: Kysely<Database> | Transaction<Database>,

@@ -1,5 +1,5 @@
 import { Request, RequestHandler, Response, Router } from 'express'
-import { yearService } from '../../services/municipal/municipal_years.services'
+import { yearService } from '../../services/municipal/municipal_years.services.js'
 
 export const getYears: RequestHandler = async (
     req: Request,

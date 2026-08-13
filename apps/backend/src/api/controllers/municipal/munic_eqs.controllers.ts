@@ -1,5 +1,5 @@
 import { RequestHandler,Request, Response} from "express"
-import { municEqsService } from "../../services/municipal/municipal_eqs.services"
+import { municEqsService } from "../../services/municipal/municipal_eqs.services.js"
 
 export const getEquations: RequestHandler = async (
     req: Request,

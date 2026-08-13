@@ -1,15 +1,15 @@
 
 import multer from "multer";
-import { peekGeojsonColumns,  insertGeojsonFile,MulterRequest } from "../../repositories/common/geojsonTemp.repositories";
-import { insertCSVFile, peekCSVColumns } from "../../repositories/common/fichiersCSV.repositories";
+import { MulterRequest } from "../../repositories/common/geojsonTemp.repositories.js";
+import { insertCSVFile, peekCSVColumns } from "../../repositories/common/fichiersCSV.repositories.js";
 import { 
     cleanupOldTempFiles,
     TMP_DIR
-} from '../../repositories/common/fileOptions.repositories'
+} from '../../repositories/common/fileOptions.repositories.js'
 import { PoolClient,Pool } from "pg";
 import path from "path";
 import {Request,Response} from 'express';
-import fs from "fs";
+
 
 const storage = multer.diskStorage({
     destination: TMP_DIR,

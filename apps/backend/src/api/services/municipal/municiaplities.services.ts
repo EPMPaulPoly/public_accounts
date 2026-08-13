@@ -1,6 +1,6 @@
 import { sql } from "kysely"
-import { db,  } from "../../../db/db"
-import { MunicUpdate, NewMunic } from "../../../db/municipal/MunicipalityTable"
+import { db,  } from "../../../db/db.js"
+import { MunicUpdate, NewMunic } from "../../../db/municipal/MunicipalityTable.js"
 class MunicipalitiesServices {
     async getMunicipalities(year:string|number|undefined,
                             mun_code:number|undefined,

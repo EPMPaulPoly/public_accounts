@@ -1,8 +1,7 @@
 
 import { describe, it, expect } from 'vitest';
-import {addRowHelperColumns} from './addHelperColumns';
-import { addRowLevelEditFlagFields } from './addLevelEditFlagFields';
-import { addRowMoveFlagField } from './addMoveFlagFIelds';
+import { addRowLevelEditFlagFields } from './addLevelEditFlagFields.js';
+import { addRowMoveFlagField } from './addMoveFlagFields.js';
 
 describe('Check that the output is correct for adding helper data', () => {
   it('outputs the correct array for a standard case', () => {

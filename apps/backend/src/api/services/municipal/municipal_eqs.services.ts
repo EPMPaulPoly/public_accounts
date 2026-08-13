@@ -1,7 +1,7 @@
 
 import { EquationCalcPrecursor } from "@budgets_municipaux/common";
-import { db } from "../../../db/db";
-import { reformatEqPrecursorForCalc } from "../../../utils/reformatEqPrecursForCalc";
+import { db } from "../../../db/db.js";
+import { reformatEqPrecursorForCalc } from "../../../utils/reformatEqPrecursForCalc.js";
 import { 
     createEquationCalcRepo,
     createEquationVarCalcRepo,
@@ -12,7 +12,7 @@ import {
     getEqVariablesRepo, 
     updateEquationCalcRepo,
     updateEquationVarCalcRepo
-} from "../../repositories/municipal/munic_eqs.repositories";
+} from "../../repositories/municipal/munic_eqs.repositories.js";
 
 import { create, all, type MathScope } from "mathjs";
 

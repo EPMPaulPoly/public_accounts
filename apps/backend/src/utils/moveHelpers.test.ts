@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import {addRowHelperColumns} from './addHelperColumns';
-import { moveRowHelper } from './moveHelpers';
+import { moveRowHelper } from './moveHelpers.js';
 
 describe('Check that the output is correct for subtree ends', () => {
   it('outputs the correct array for an intermediate row case', () => {

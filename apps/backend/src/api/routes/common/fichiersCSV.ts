@@ -1,7 +1,7 @@
 import { RequestHandler, Router } from "express";
 import { Pool } from "pg";
-import { importCSVFile, runCSVFileUpload } from "../../services/common/fichiersCSV.services";
-import { requireAuth, requireRole } from "../../middleware/auth";
+import { importCSVFile, runCSVFileUpload } from "../../services/common/fichiersCSV.services.js";
+import { requireAuth, requireRole } from "../../middleware/auth.js";
 
 
 export const creationRouteurDonneesCSV = (pool: Pool): Router => {

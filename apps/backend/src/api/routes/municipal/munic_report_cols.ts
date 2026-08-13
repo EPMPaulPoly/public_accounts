@@ -6,8 +6,8 @@ import {
     moveCol, 
     newCol, 
     upsertReportCols 
-} from '../../controllers/municipal/munic_report_cols.controllers'
-import { validate } from '../../middleware/validate'
+} from '../../controllers/municipal/munic_report_cols.controllers.js'
+import { validate } from '../../middleware/validate.js'
 import { 
     ReportColsChangeDescSchema, 
     ReportColsMoveSchema, 
@@ -15,8 +15,8 @@ import {
     ReportColsUpsertSchema,
     ReportDeleteColSchema,
     ReportNewColSchema, 
- } from '../../validators/municipal/munic_report_cols.validators'
-import { requireAuth, requireRole } from '../../middleware/auth'
+ } from '../../validators/municipal/munic_report_cols.validators.js'
+import { requireAuth, requireRole } from '../../middleware/auth.js'
 
 export const MunicReportColsRouter=()=>{
 

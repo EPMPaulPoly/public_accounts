@@ -1,6 +1,4 @@
-import { Database } from "../../../db/types";
-import { Kysely } from "kysely";
-import { db } from "../../../db/db";
+import { db } from "../../../db/db.js";
 class YearsService {
     async getYears() {
 

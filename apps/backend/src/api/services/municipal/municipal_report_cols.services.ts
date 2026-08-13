@@ -1,12 +1,12 @@
 
-import { sql } from "kysely";
-import { db } from "../../../db/db";
-import { FinStateSectionCol, FinStateSectionRow } from "@budgets_municipaux/common";
-import { addColHelperColumns, stripColHelperColumns } from "../../../utils";
-import { cleanColOrderAfterDelete } from "../../../utils/cleanOrderAfterDelete";
-import { upsertReportColsTransact } from "../../repositories/municipal/munic_report_cols.repositories";
-import { moveColHelper } from "../../../utils/moveHelpers";
-import { newColHelper } from "../../../utils/newItemHelper";
+
+import { db } from "../../../db/db.js";
+import { FinStateSectionCol } from "@budgets_municipaux/common";
+import { addColHelperColumns, stripColHelperColumns } from "../../../utils/index.js";
+import { cleanColOrderAfterDelete } from "../../../utils/cleanOrderAfterDelete.js";
+import { upsertReportColsTransact } from "../../repositories/municipal/munic_report_cols.repositories.js";
+import { moveColHelper } from "../../../utils/moveHelpers.js";
+import { newColHelper } from "../../../utils/newItemHelper.js";
 class ReportColsService {
     async getReportCols({
         row_id,

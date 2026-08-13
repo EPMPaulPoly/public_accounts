@@ -1,13 +1,13 @@
 
-import { FinStateSecValueSibs, FinStateSecValueWLev, type FinStateSecAssignWLev } from "@budgets_municipaux/common";
-import { db } from "../../../db/db";
-import { addRowLevelEditFlagFields } from "../../../utils/addLevelEditFlagFields";
-import { reshapeMatchesHelper } from "../../../utils/reshapeMatchesHelper";
-import { getMatchesQuery,getGridMatchesQuery } from "../../repositories/municipal/munic_report_matches.repositories";
-import { getDataValGridRepo, getProvIdQuery } from "../../repositories/municipal/munic_report_data.repositories";
-import { reshapeDataHelper } from "../../../utils/reshapeDataHelper";
-import { addRowSiblings } from "../../../utils/addSiblingsRows";
-import { rollUpChildValuesOnNull } from "../../../utils/rollupChildValuesOnNull";
+import { FinStateSecValueSibs } from "@budgets_municipaux/common";
+import { db } from "../../../db/db.js";
+import { 
+    getDataValGridRepo, 
+    getProvIdQuery 
+} from "../../repositories/municipal/munic_report_data.repositories.js";
+import { reshapeDataHelper } from "../../../utils/reshapeDataHelper.js";
+import { addRowSiblings } from "../../../utils/addSiblingsRows.js";
+import { rollUpChildValuesOnNull } from "../../../utils/rollupChildValuesOnNull.js";
 
 class ReportDataService {
     async getProvIds(year?:number,limit?:number,offset?:number,search_string?:string) {

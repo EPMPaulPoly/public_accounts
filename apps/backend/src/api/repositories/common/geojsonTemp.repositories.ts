@@ -4,7 +4,7 @@ import { parser,} from "stream-json";
 import { pick } from "stream-json/filters/pick.js";
 import { streamArray } from "stream-json/streamers/stream-array.js";
 import { PoolClient} from 'pg';
-import { TMP_DIR } from "./fileOptions.repositories";
+import { TMP_DIR } from "./fileOptions.repositories.js";
 import { chain } from "stream-chain";
 export type MulterRequest = Request & {
   file?: Express.Multer.File;

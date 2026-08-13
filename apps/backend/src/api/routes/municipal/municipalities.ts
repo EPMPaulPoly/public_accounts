@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { getMunicipality, getRegions } from "../../controllers/municipal/municipalities.controllers"
+import { getMunicipality, getRegions } from "../../controllers/municipal/municipalities.controllers.js"
 
 
 export const MunicipalitiesRouter=()=>{

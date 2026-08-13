@@ -1,5 +1,5 @@
 import { Kysely, sql, Transaction } from "kysely"
-import { Database } from "../../../db/types"
+import { Database } from "../../../db/types.js"
 
 export const getProvIdQuery = async (
     db: Kysely<Database> | Transaction<Database>,

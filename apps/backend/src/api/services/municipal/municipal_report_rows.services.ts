@@ -1,15 +1,14 @@
 
 import { sql } from "kysely";
-import { db } from "../../../db/db";
+import { db } from "../../../db/db.js";
 import { FinStateSecRowLev, FinStateSecRowWHelp, FinStateSectionRow } from "@budgets_municipaux/common";
-import { cleanRowOrderAfterDelete } from "../../../utils/cleanOrderAfterDelete";
-import { addRowHelperColumns, stripRowHelperColumns } from "../../../utils";
-import { upsertReportRowsTransact } from "../../repositories/municipal/munic_report_rows.repositories";
-import { moveRowHelper } from "../../../utils/moveHelpers";
-import { newColHelper, newRowHelper } from "../../../utils/newItemHelper";
-import { stripRowHelperColumnsLev } from "../../../utils/stripHelperColumns";
-import { addRowSiblings } from "../../../utils/addSiblingsRows";
-import { addRowMoveFlagField } from "../../../utils/addMoveFlagFIelds";
+import { cleanRowOrderAfterDelete } from "../../../utils/cleanOrderAfterDelete.js";
+import { addRowHelperColumns, stripRowHelperColumns } from "../../../utils/index.js";
+import { upsertReportRowsTransact } from "../../repositories/municipal/munic_report_rows.repositories.js";
+import { moveRowHelper } from "../../../utils/moveHelpers.js";
+import {  newRowHelper } from "../../../utils/newItemHelper.js";
+import { addRowSiblings } from "../../../utils/addSiblingsRows.js";
+import { addRowMoveFlagField } from "../../../utils/addMoveFlagFields.js";
 class ReportRowsService {
     async getReportRows({
         row_id,

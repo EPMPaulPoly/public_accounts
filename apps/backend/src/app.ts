@@ -1,10 +1,8 @@
 import express from "express";
-import { createApiRouter } from "./api/routes";
-import { db } from "./db/db";
-import { sql } from "kysely";
+import { createApiRouter } from "./api/routes/index.js";
 import cors from 'cors'
 import { toNodeHandler } from "better-auth/node";
-import {auth} from './utils/auth'
+import {auth} from './utils/auth.js'
 import 'dotenv'
 
 export const app = express();

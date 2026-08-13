@@ -1,7 +1,6 @@
 import { Kysely, sql, Transaction } from "kysely";
-import { Database } from "../../../db/types";
-import { FinStateSectionCol } from "@budgets_municipaux/common";
-import { addColHelperColumns } from "../../../utils";
+import { Database } from "../../../db/types.js";
+
 type filters = {
     row_id?: number | undefined,
     part_id?: number | undefined,
