@@ -28,6 +28,7 @@ function UserTable(props:UTProps){
         event: React.MouseEvent<HTMLButtonElement> | null,
         newPage: number,
     ) => {
+        event;
         props.onChange.setPage(newPage);
     };
 

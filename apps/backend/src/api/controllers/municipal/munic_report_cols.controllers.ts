@@ -1,6 +1,6 @@
-import { Request, RequestHandler, Response, Router } from 'express'
-import { reportColsService } from '../../services/municipal/municipal_report_cols.services'
-import { FinStateSectionCol, FinStateSectionRow } from '@budgets_municipaux/common'
+import { Request, RequestHandler, Response } from 'express'
+import { reportColsService } from '../../services/municipal/municipal_report_cols.services.js'
+import { FinStateSectionCol } from '@budgets_municipaux/common'
 
 
 export const getReportCols: RequestHandler = async (

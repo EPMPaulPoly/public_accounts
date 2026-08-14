@@ -1,10 +1,9 @@
 
 import type { VisualizationConfig } from "../../visualisation/types";
-import type { reportAssignData, reportAssignOptions, reportAssignSelection } from "./types";
+import type { reportAssignOptions, reportAssignSelection } from "./types";
 import { serviceReportParts } from "../../../services/mun/serviceReportParts";
-import type { FinStateAssignGrid, FinStateSecColWHelp, FinStateSecRowWHelp, FinStateSection, ProvincialDataId } from "@budgets_municipaux/common";
-import { serviceReportRows } from "../../../services/mun/serviceReportRows";
-import { serviceReportCols } from "../../../services/mun/serviceReportCols";
+import type { FinStateAssignGrid, FinStateSection, ProvincialDataId } from "@budgets_municipaux/common";
+
 import { serviceReportData } from "../../../services/mun/serviceData";
 import { serviceMunicEnt } from "../../../services/mun/serviceMunicEntites";
 import { serviceReportAssign } from "../../../services/mun/serviceReportAssign";

@@ -1,4 +1,9 @@
-import { FinStateSecColLev, FinStateSecColWHelp, FinStateSecRowLev, FinStateSecRowWHelp, FinStateSectionCol, FinStateSectionRow } from "@budgets_municipaux/common"
+import { 
+    FinStateSecColLev, 
+    FinStateSecRowLev, 
+    FinStateSectionCol, 
+    FinStateSectionRow 
+} from "@budgets_municipaux/common"
 
 export function addRowLevelEditFlagFields(cleanRows: FinStateSectionRow[]): FinStateSecRowLev[] {
     const topLevels = cleanRows.filter((rowF) => rowF.parent_id === null)

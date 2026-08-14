@@ -1,4 +1,4 @@
-import type { FinStateSecColWHelp, FinStateSecRowWHelp, FinStateSection } from "@budgets_municipaux/common";
+import type { FinStateSecColWHelp, FinStateSecRowWHelp } from "@budgets_municipaux/common";
 import { Box, Button, MenuItem, Modal, Select, TextField } from "@mui/material";
 import { useState, type Dispatch, type SetStateAction } from "react";
 import  { serviceReportRows } from "../../services/mun/serviceReportRows";

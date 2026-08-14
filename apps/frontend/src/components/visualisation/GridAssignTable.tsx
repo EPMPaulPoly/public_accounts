@@ -1,6 +1,5 @@
 import { 
-    type FinStateAssignGrid, 
-    type FinStateSection 
+    type FinStateAssignGrid
 } from "@budgets_municipaux/common";
 import { Delete, Edit, KeyboardArrowDown, KeyboardArrowRight } from "@mui/icons-material";
 import { 
@@ -42,7 +41,7 @@ interface props{
     
 }
 export default function GridAssignTable(props:props){
-        const { data: session, isPending } = authClient.useSession();
+        const { data: session} = authClient.useSession();
               
         const isAdmin = session?.user.role === 'admin';
         const [expanded, setExpanded] = useState<Set<number>>(new Set());

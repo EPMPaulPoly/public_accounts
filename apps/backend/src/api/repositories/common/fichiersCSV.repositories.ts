@@ -1,7 +1,7 @@
 
 import fs from "fs";
 import { PoolClient} from 'pg';
-import { TMP_DIR } from "./fileOptions.repositories";
+import { TMP_DIR } from "./fileOptions.repositories.js";
 
 import csvParser from "csv-parser";
 

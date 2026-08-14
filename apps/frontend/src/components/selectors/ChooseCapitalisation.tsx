@@ -1,5 +1,5 @@
 
-import { Checkbox, FormControl, FormControlLabel, InputLabel } from "@mui/material"
+import { Checkbox, FormControl, FormControlLabel } from "@mui/material"
 
 interface CCapProps {
     value: boolean,

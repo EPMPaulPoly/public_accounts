@@ -61,11 +61,10 @@ interface props {
 }
 
 function ReportPageCreator(props: props) {
-    const { data: session, isPending } = authClient.useSession();
+    const { data: session } = authClient.useSession();
       
     const isAdmin = session?.user.role === 'admin';
 
-    const [targetParentRow, setTargetParentRow] = useState<FinStateSecRowWHelp | null>(null)
     const [newItemModalOpen,setNewItemModalOpen]=useState<boolean>(false);
     const [newItemType,setNewItemType]=useState<'row'|'col'|null>(null)
     const [expanded, setExpanded] = useState<Set<number>>(new Set());
@@ -142,17 +141,28 @@ function ReportPageCreator(props: props) {
 
     async function handleDelete() {
         if (props.selection.RowEdit!== null) {
-            const newRowSetup = await serviceReportRows.deleteRow(props.selection.RowEdit)
-
-            props.onChangeLoc.setRowEdit(null)
-            props.setEditing(false)
-            props.forceDataUpdate()
+            const result= await serviceReportRows.deleteRow(props.selection.RowEdit)
+            if (result.success===true){
+                props.onChangeLoc.setRowEdit(null)
+                props.setEditing(false)
+                props.forceDataUpdate()
+            } else{
+                setSnackMessage('Deleting report row failed')
+                setSnackSev('error')
+                setSnackOpen(true)
+            }
         }
         if (props.selection.ColEdit !== null) {
-            const newColSetup = await serviceReportCols.deleteCol(props.selection.ColEdit)
-            props.onChangeLoc.setColEdit(null)
-            props.setEditing(false)
-            props.forceDataUpdate()
+            const result=await serviceReportCols.deleteCol(props.selection.ColEdit)
+            if (result.success===true){
+                props.onChangeLoc.setColEdit(null)
+                props.setEditing(false)
+                props.forceDataUpdate()
+            }else{
+                setSnackMessage('Deleting report column failed')
+                setSnackSev('error')
+                setSnackOpen(true)
+            }
         }
     }
     async function handleMoveUp() {
@@ -307,8 +317,6 @@ function ReportPageCreator(props: props) {
             props.onChangeLoc.setRowEdit(row_id)
             const editFlag = props.data.rows.map((rowM) => { if (rowM.row_id === row_id) { return { ...rowM, edit_flag: true } } else { return { ...rowM } } })
             props.setData.updateRows(editFlag)
-            const parent_id = props.data.rows.find((r) => r.row_id === row_id).parent_id
-            setTargetParentRow(parent_id)
         }
     }
     function handleColSelect(col_id: number) {
@@ -432,7 +440,7 @@ function ReportPageCreator(props: props) {
                                 {props.editing && props.selection.RowEdit !== r.row_id ? <TableCell></TableCell> : <></>}
                             </>
                         }
-                        {props.data.cols.map((row) => <TableCell></TableCell>)}
+                        {props.data.cols.map(() => <TableCell></TableCell>)}
                     </>
                 </TableRow>)}
             {!props.editing &&isAdmin?

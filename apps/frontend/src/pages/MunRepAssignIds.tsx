@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import MenuBar from "../components/common/MenuBar";
 
 import DataAssignmentMenu from "../components/controlBars/DataAssignmentMenuBar";

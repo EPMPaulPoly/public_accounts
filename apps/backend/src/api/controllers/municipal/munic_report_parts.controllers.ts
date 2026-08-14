@@ -1,5 +1,5 @@
     import { Request, RequestHandler, Response, Router } from 'express'
-import { reportPartsService } from '../../services/municipal/municipal_report_parts.services'
+import { reportPartsService } from '../../services/municipal/municipal_report_parts.services.js'
     
     export const getReportParts:RequestHandler=async(
         req:Request,

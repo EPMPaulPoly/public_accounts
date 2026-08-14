@@ -1,4 +1,4 @@
-import type { backend_response,FinStateSecColWHelp,FinStateSectionCol,FinStateSectionRow } from "@budgets_municipaux/common"
+import type { backend_response,FinStateSecColWHelp,FinStateSectionCol } from "@budgets_municipaux/common"
 import api from "../api"
 
 class ServiceReportCols{

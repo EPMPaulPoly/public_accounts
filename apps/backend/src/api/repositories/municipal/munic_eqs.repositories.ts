@@ -1,5 +1,5 @@
 import { Kysely, sql, Transaction } from "kysely";
-import { Database } from "../../../db/types";
+import { Database } from "../../../db/types.js";
 
 
 export const getEqsRepo = async (
@@ -112,7 +112,7 @@ export const getEquationCalcPrecRepo = async (
         'e.eq_expression',
         'm.prov_rep_id',
         sql<number>`COALESCE(d.value,0)::bigint`.as('value'),
-    ]).orderBy(['mun.population desc','eq_var_id asc'])
+    ]).orderBy('mun.population','desc').orderBy('eq_var_id','asc')
     const data = await query.execute()
     return data
 }

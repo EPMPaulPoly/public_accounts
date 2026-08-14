@@ -1,7 +1,7 @@
 import { getMigrations } from 'better-auth/db/migration'
-import { db } from '../db/db'
-import { createMigrator } from '../db/migrationProvider'
-import { auth } from '../utils/auth'
+import { db } from '../db/db.js'
+import { createMigrator } from '../db/migrationProvider.js'
+import { auth } from '../utils/auth.js'
 
 
 type RollbackMode = 'custom-steps' | 'better-auth-last' | 'both'

@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import ChooseYear from "../components/selectors/ChooseYear"
 import MenuBar from "../components/common/MenuBar"
-import { type FileDBEquivalence, type municipalite , type regions, type year} from "@budgets_municipaux/common"
+import { type FileDBEquivalence } from "@budgets_municipaux/common"
 import UploadMunicipalititesManagement from "../components/controlBars/UploadMunicManagement"
 import CreateYearModal from "../components/objectCreation/CreateYearModal"
 import ModalVersementCSV from "../components/fileUpload/ModalVersementCSV"
@@ -131,9 +131,7 @@ function MunicipalitiesOverview(){
                 >
                 
             <UploadMunicipalititesManagement
-                dateModalOpen={dateModalOpen}
                 setDateModalOpen={setDateModalOpen}
-                uploadMunicModalOpen={municUploadModalOpen}
                 setUploadMunicModalOpen={setMunicUploadModalOpen}
             />
             <ChooseRegion

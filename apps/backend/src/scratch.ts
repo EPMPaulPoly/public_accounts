@@ -1,6 +1,6 @@
-import { addColHelperColumns, addRowHelperColumns } from "./utils";
-import { moveColHelper, moveRowHelper } from "./utils/moveHelpers";
-import { newColHelper } from "./utils/newItemHelper";
+import { addColHelperColumns, addRowHelperColumns } from "./utils/index.js";
+import { moveColHelper, moveRowHelper } from "./utils/moveHelpers.js";
+import { newColHelper } from "./utils/newItemHelper.js";
 /*
 const rows =  [
             {row_id:1,row_desc:"1",part_id:1,parent_id:null,item_order:1},

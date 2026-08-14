@@ -29,7 +29,7 @@ interface PropsBoutApprobVersement{
 }
 
 function BoutonApprobationVerse(props:PropsBoutApprobVersement){
-    const {setSnackMessage,setSnackOpen,setSnackSev,snackSev,snackOpen,snackMessage}=useAppContext()
+    const {setSnackMessage,setSnackOpen,setSnackSev}=useAppContext()
     const handleFileInsert=async ()=>{
         try{
             const regularMapping = Object.values(props.champsARemplir)
@@ -154,15 +154,8 @@ function BoutonApprobationVerse(props:PropsBoutApprobVersement){
         }
     }
 
-    const geomNotPresentCheck=(entree:EquivalenceCSVCoordPoint[]|undefined):boolean=>{
-        if (entree === undefined){
-            return true
-        }else{
-            return false
-        }
-    }
 
-    const basicPropsCheck = (entree:FileDBEquivalence[]):boolean=>{
+    const basicPropsCheck = ():boolean=>{
         if (props.champsARemplir.every(val => 
                     val.file_column !== ''||mandatoryCheck(val) // vérifie que tous les champs obligatoires sont remplis
                 ) 
@@ -170,7 +163,7 @@ function BoutonApprobationVerse(props:PropsBoutApprobVersement){
                 return true
             }else{return false}
     }
-    const geomPropsCheck = (entree:EquivalenceCSVCoordPoint[]|undefined):boolean=>{
+    const geomPropsCheck = ():boolean=>{
             if (props.champsGeomARemplir){
                 if (props.champsGeomARemplir.every(val=> (
                     (// si c'est un ligne je veux toutes les valeurs rentrées
@@ -191,7 +184,7 @@ function BoutonApprobationVerse(props:PropsBoutApprobVersement){
         }
     
     const overallCheck = ():boolean=>{
-        if (basicPropsCheck(props.champsARemplir) && geomPropsCheck(props.champsGeomARemplir)){
+        if (basicPropsCheck() && geomPropsCheck()){
         return true
         }else{return false}
     }

@@ -7,8 +7,8 @@ import {
     move,
     newRow, 
     upsertReportRows 
-} from '../../controllers/municipal/munic_report_rows.controllers'
-import { validate } from '../../middleware/validate'
+} from '../../controllers/municipal/munic_report_rows.controllers.js'
+import { validate } from '../../middleware/validate.js'
 import { 
     ReportRowsChangeDescSchema, 
     ReportRowsChangeParentSchema, 
@@ -17,8 +17,8 @@ import {
     ReportNewRowSchema, 
     ReportRowsQuerySchema, 
     ReportRowsUpsertSchema 
-} from '../../validators/municipal/munic_report_rows.validators'
-import { requireAuth, requireRole } from '../../middleware/auth'
+} from '../../validators/municipal/munic_report_rows.validators.js'
+import { requireAuth, requireRole } from '../../middleware/auth.js'
 
 export const MunicReportRowsRouter=()=>{
     const router = Router()

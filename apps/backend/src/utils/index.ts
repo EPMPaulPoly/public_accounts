@@ -1,3 +1,3 @@
 
-export {stripRowHelperColumns,stripColHelperColumns} from './stripHelperColumns'
-export {addRowHelperColumns,addColHelperColumns} from './addHelperColumns'
+export {stripRowHelperColumns,stripColHelperColumns} from './stripHelperColumns.js'
+export {addRowHelperColumns,addColHelperColumns} from './addHelperColumns.js'

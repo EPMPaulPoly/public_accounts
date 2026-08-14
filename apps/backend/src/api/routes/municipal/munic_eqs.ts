@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { validate } from '../../middleware/validate'
+import { validate } from '../../middleware/validate.js'
 import { 
     DeleteEquationScheme,
     DeleteVariableScheme,
@@ -10,7 +10,7 @@ import {
     PostVariableScheme, 
     PutEquationScheme,
     PutVariableScheme
-} from '../../validators/municipal/munic_eqs.validators'
+} from '../../validators/municipal/munic_eqs.validators.js'
 import { 
     createEquation, 
     createVariable, 
@@ -21,8 +21,8 @@ import {
     getVariables, 
     updateEquation, 
     updateVariable
-} from '../../controllers/municipal/munic_eqs.controllers'
-import { requireAuth, requireRole } from '../../middleware/auth'
+} from '../../controllers/municipal/munic_eqs.controllers.js'
+import { requireAuth, requireRole } from '../../middleware/auth.js'
 
 const MunicEquationsRouter=()=>{
     console.log('equations router enabled')

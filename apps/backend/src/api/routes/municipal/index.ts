@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import { MunicYearsRouter } from './munic_years';
-import MunicReportPartsRouter from './munic_report_parts';
-import MunicipalitiesRouter from './municipalities';
-import MunicReportRowsRouter from './munic_report_rows';
-import MunicReportColsRouter from './munic_report_cols';
-import MunicReportMatchesRouter from './munic_report_matches';
-import MunicReportDataRouter from './munic_report_data';
-import MunicEquationsRouter from './munic_eqs';
+import { MunicYearsRouter } from './munic_years.js';
+import MunicReportPartsRouter from './munic_report_parts.js';
+import MunicipalitiesRouter from './municipalities.js';
+import MunicReportRowsRouter from './munic_report_rows.js';
+import MunicReportColsRouter from './munic_report_cols.js';
+import MunicReportMatchesRouter from './munic_report_matches.js';
+import MunicReportDataRouter from './munic_report_data.js';
+import MunicEquationsRouter from './munic_eqs.js';
 
 export const createMunicipalRouter = () => {
     const router = Router();

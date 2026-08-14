@@ -1,5 +1,5 @@
 import { Request, RequestHandler, Response } from 'express'
-import { municipalitiesServices } from '../../services/municipal/municiaplities.services'
+import { municipalitiesServices } from '../../services/municipal/municiaplities.services.js'
 
 export const getMunicipality: RequestHandler = async (
     req: Request,

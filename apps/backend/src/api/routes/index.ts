@@ -1,8 +1,6 @@
-import { Router } from 'express';
-import { MunicYearsRouter } from './municipal/munic_years';
-import MunicReportPartsRouter from './municipal/munic_report_parts';
-import { createMunicipalRouter } from './municipal';
-import { createCommonRouter } from './common';
+import { Router } from 'express'; 
+import { createMunicipalRouter } from './municipal/index.js';
+import { createCommonRouter } from './common/index.js';
 
 export const createApiRouter = () => {
     const router = Router();

@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { creationRouteurDonnees } from './geojsonGest';
-import { creationRouteurDonneesCSV } from './fichiersCSV';
+import { creationRouteurDonnees } from './geojsonGest.js';
+import { creationRouteurDonneesCSV } from './fichiersCSV.js';
 import { Pool } from 'pg';
 
 export const createCommonRouter = () => {

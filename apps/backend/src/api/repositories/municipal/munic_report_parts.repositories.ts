@@ -1,5 +1,5 @@
 import { Kysely, Transaction } from "kysely";
-import {  Database } from "../../../db/types";
+import {  Database } from "../../../db/types.js";
 
 
 class MunicPartRepository{

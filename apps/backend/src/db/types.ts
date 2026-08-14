@@ -1,30 +1,23 @@
-import {
-  ColumnType,
-  Generated,
-  Insertable,
-  JSONColumnType,
-  Selectable,
-  Updateable,
-} from 'kysely'
 
-import { YearTable } from './municipal/MunYearTable'
-import { MunicipalityTable } from './municipal/MunicipalityTable'
-import { ReportPartsTable } from './municipal/MunReportPartsTable'
-import { PartRowsTable } from './municipal/MunPartRowsTable'
-import { PartColumnsTable } from './municipal/MunPartColumnsTable'
-import { PartRowColDataMatchTable } from './municipal/MunPartRowColumnDataMatch'
-import { DataTable } from './municipal/MunDataTable'
-import { EqsTable } from './municipal/MunEqsTable'
-import { EqVarsTable } from './municipal/MunEqVarsTable'
-export * from './municipal/MunYearTable'
-export * from './municipal/MunicipalityTable'
-export * from './municipal/MunReportPartsTable'
-export * from './municipal/MunReportPartsTable'
-export * from './municipal/MunPartColumnsTable'
-export * from './municipal/MunPartRowColumnDataMatch'
-export * from './municipal/MunDataTable'
-export * from './municipal/MunEqsTable'
-export * from './municipal/MunEqVarsTable'
+
+import { YearTable } from './municipal/MunYearTable.js'
+import { MunicipalityTable } from './municipal/MunicipalityTable.js'
+import { ReportPartsTable } from './municipal/MunReportPartsTable.js'
+import { PartRowsTable } from './municipal/MunPartRowsTable.js'
+import { PartColumnsTable } from './municipal/MunPartColumnsTable.js'
+import { PartRowColDataMatchTable } from './municipal/MunPartRowColumnDataMatch.js'
+import { DataTable } from './municipal/MunDataTable.js'
+import { EqsTable } from './municipal/MunEqsTable.js'
+import { EqVarsTable } from './municipal/MunEqVarsTable.js'
+export * from './municipal/MunYearTable.js'
+export * from './municipal/MunicipalityTable.js'
+export * from './municipal/MunReportPartsTable.js'
+export * from './municipal/MunReportPartsTable.js'
+export * from './municipal/MunPartColumnsTable.js'
+export * from './municipal/MunPartRowColumnDataMatch.js'
+export * from './municipal/MunDataTable.js'
+export * from './municipal/MunEqsTable.js'
+export * from './municipal/MunEqVarsTable.js'
 
 export interface Database{
     'municipal_qc.year_table': YearTable,

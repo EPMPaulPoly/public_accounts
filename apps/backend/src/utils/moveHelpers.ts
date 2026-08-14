@@ -1,7 +1,7 @@
-import { FinStateSecColLev, FinStateSecColWHelp, FinStateSecRowLev, FinStateSecRowWHelp, FinStateSectionRow } from "@budgets_municipaux/common";
-import { stripColHelperColumns, stripColHelperColumnsLev, stripRowHelperColumns, stripRowHelperColumnsLev } from "./stripHelperColumns";
-import { addColSiblings, addRowSiblings } from "./addSiblingsRows";
-import { addColMoveFlagField, addRowMoveFlagField } from "./addMoveFlagFIelds";
+import {  FinStateSecColWHelp,  FinStateSecRowWHelp} from "@budgets_municipaux/common";
+import { stripColHelperColumnsLev, stripRowHelperColumnsLev } from "./stripHelperColumns.js";
+import { addColSiblings, addRowSiblings } from "./addSiblingsRows.js";
+import { addColMoveFlagField, addRowMoveFlagField } from "./addMoveFlagFields.js";
 
 
 export function moveRowHelper(

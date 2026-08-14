@@ -14,7 +14,7 @@ interface props{
 
 export default function MunicIndicatorCreateControlBar(props:props){
 
-    const { data: session, isPending } = authClient.useSession();
+    const { data: session } = authClient.useSession();
               
     const isUser = session?.user.role === 'user'||session?.user.role==='admin';
     return(
