@@ -2,7 +2,9 @@ import axios, { AxiosError  } from 'axios';
 import type{InternalAxiosRequestConfig,AxiosResponse} from 'axios'
 
 
-const apiUrl = (import.meta.env.VITE_BACKEND_URL||'http://localhost:5000')+'/api';
+let apiUrl = import.meta.env.VITE_BACKEND_URL|| window.location.origin// otherwise just use the current window. 
+
+apiUrl = apiUrl+'/api'; // append api for the api to function
 const api = axios.create({
   baseURL:  apiUrl, //
   headers: {
