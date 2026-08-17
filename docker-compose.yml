@@ -11,9 +11,8 @@ services:
       - ./packages:/app/packages
       - /app/apps/frontend/node_modules
     environment:
-      - VITE_API_URL=http://localhost:5000/api      
+      - VITE_BACKEND_URL=${BACKEND_URL}     
       - CHOKIDAR_USEPOLLING=true
-      - VITE_BETTER_AUTH_URL=${BETTER_AUTH_URL}
   backend:
     build:
       context: .
@@ -32,9 +31,9 @@ services:
       - DB_NAME=${DB_NAME}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_PORT=5432
-      - BETTER_AUTH_URL=${BETTER_AUTH_URL}
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
       - TRUSTED_FRONTEND=${TRUSTED_FRONTEND}
+      - BETTER_AUTH_URL=${BACKEND_URL}
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:
