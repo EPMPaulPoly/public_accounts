@@ -19,10 +19,10 @@ function createMigrationFile(name: string) {
   const ts = timestamp()
   const fileName = `${ts}_${name}.ts`
 
-  const filePath = path.join(process.cwd(), 'migrations', fileName)
+  const filePath = path.join(process.cwd(),'src', 'migrations', fileName)
 
   const template = `import { Kysely } from 'kysely'
-import { Database } from '../src/db/types'
+import { Database } from '../db/types.js'
 
 export async function up(db: Kysely<Database>): Promise<void> {
 
