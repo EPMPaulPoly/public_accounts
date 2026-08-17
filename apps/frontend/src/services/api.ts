@@ -2,9 +2,9 @@ import axios, { AxiosError  } from 'axios';
 import type{InternalAxiosRequestConfig,AxiosResponse} from 'axios'
 
 
-const apiUrl = import.meta.env.VITE_API_URL;
+const apiUrl = (import.meta.env.VITE_BACKEND_URL||'http://localhost:5000')+'/api';
 const api = axios.create({
-  baseURL:  apiUrl || 'http://localhost:5000/api', //
+  baseURL:  apiUrl, //
   headers: {
     'Content-Type': 'application/json'
   },
