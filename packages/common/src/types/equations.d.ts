@@ -1,3 +1,4 @@
+import { IndicatorWUse } from "./constants.js"
 
 export type EquationDef={
     eq_id:number,
@@ -43,6 +44,7 @@ export type EquationCalcFormatted = EquationCalcRow & {
     nom_organisme:string,
     population:number
     cells: EquationVarData[];
+    consts: IndicatorWUse[];
     scope: Record<string, number>;
 };
 export type EquationCalcResult=EquationCalcFormatted&{

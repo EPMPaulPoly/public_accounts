@@ -63,3 +63,8 @@ export type{
     ColumnGeometryLine,
     EquivalenceCSVCoordPoint
 } from './fileUpload.js'
+
+export type{
+    IndicatorConstant,
+    IndicatorWUse
+} from './constants.js'
