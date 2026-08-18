@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { creationRouteurDonnees } from './geojsonGest.js';
 import { creationRouteurDonneesCSV } from './fichiersCSV.js';
 import { Pool } from 'pg';
+import { creationRouteurConstantesConstruction } from './constants.js';
 
 export const createCommonRouter = () => {
     const database= {
@@ -16,5 +17,6 @@ export const createCommonRouter = () => {
     console.log('going through common router')
     router.use('/geojson',creationRouteurDonnees(pool))
     router.use('/fichier-csv',creationRouteurDonneesCSV(pool))
+    router.use('/constants',creationRouteurConstantesConstruction())
     return router;
 }
