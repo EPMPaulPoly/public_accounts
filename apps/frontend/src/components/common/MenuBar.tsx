@@ -21,6 +21,7 @@ const StyledListHeader = styled(ListSubheader)({
 
 const commonPages =[
     { label: "Accueil", path: "/" },
+    { label: "Constantes", path:"/common/constants"}
 ]
 const municipalPages = [
     { label: 'Municipalités', path:'/munic/cities' },

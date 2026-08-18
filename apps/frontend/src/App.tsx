@@ -15,6 +15,7 @@ import AdminProtectedRoute from './utils/AdminProtectedRoute';
 import AdminPage from './pages/Admin';
 import UserProtectedRoute from './utils/UserProtectedRoute';
 import UserProfile from './pages/UserProfile';
+import { Constants } from './pages/Constants';
 
 const theme = createTheme({
   palette: {
@@ -42,6 +43,7 @@ function App() {
 					<Route path='/munic/fin-state' element={<MunicipalAccountRawView/>}/>
 					<Route path='/munic/indics-create' element={<MunicIndicatorsCreation/>}/>
 					<Route path='/munic/indics-ana' element={<MunicIndicatorsAnalysis/>}/>
+					<Route path='/common/constants' element={<Constants/>}/>
 					<Route element={<UserProtectedRoute/>}>
 						<Route path='/profil' element={<UserProfile/>}/>
 					</Route>
