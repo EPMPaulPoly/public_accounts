@@ -81,6 +81,12 @@ export function useMunicIndicatorsCreationVisualization() {
         }
         return false
     }
+
+    async function forceUpdate(){
+        viz.updateSelection(selection => ({
+            ...selection,
+        }))
+    }
     return {
         ...viz,
         setEquation: setSelectedEquation,
@@ -92,6 +98,7 @@ export function useMunicIndicatorsCreationVisualization() {
         setEqVarUpdateOrCreateFlag,
         setPartId,
         createEquationVar,
-        updateEquationVar
+        updateEquationVar,
+        forceUpdate
     }
 }

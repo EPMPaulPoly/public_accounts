@@ -20,7 +20,7 @@ export function IndicatorEquationDisplay(props: eqDispProps) {
     return (<>
         {props.values && eqToDisp&&props.options&& (
             <Box
-                sx={{gap:'5px'}}
+                sx={{gap:'5px',padding:'10px'}}
             >
                 <Table>
                     <TableBody>

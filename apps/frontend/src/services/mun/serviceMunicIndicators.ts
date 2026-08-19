@@ -139,5 +139,23 @@ class ServiceIndicatorEquation{
             return {success:false}
         }
     }
+
+    async addConstantUse(eq_id:number,const_id:number){
+        try{
+            const data = await api.post(`/munic/indicators/constant-use`,{eq_id:eq_id,const_id:const_id})
+            return {success:data.data.success,data:data.data.data,message:data.data.message}
+        }catch(error:any){
+            return {success:false,message:`Error creating use: ${error.message}`}
+        }
+    }
+    
+    async deleteConstantUse(use_id:number){
+        try{
+            const data = await api.delete(`/munic/indicators/constant-use/${use_id}`)
+            return {success:data.data.success,data:data.data.data,message:data.data.message}
+        }catch(error:any){
+            return {success:false,message:`Error creating use: ${error.message}`}
+        }
+    }
 }
 export const serviceIndicatorEquation= new ServiceIndicatorEquation()

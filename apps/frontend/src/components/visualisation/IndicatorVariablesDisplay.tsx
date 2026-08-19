@@ -38,13 +38,19 @@ export default function IndicatorVariablesDisplay(props: IVDprops) {
     const { data: session} = authClient.useSession();
                       
     const isUser = session?.user.role === 'user'||session?.user.role==='admin';
-    return (<>
+    return (
+    <div
+        style={{
+            gap:'10px'
+        }}
+    >
         {
             props.selection.eq_id && (
                 <>
                     <Table
                         stickyHeader
                         size='small'
+                        sx={{paddingLeft:'10px',paddingRight:'10px',paddingBottom:'10px'}}
                     >
                         <TableHead>
                             <TableRow>
@@ -120,5 +126,5 @@ export default function IndicatorVariablesDisplay(props: IVDprops) {
             )
         }
 
-    </>)
+    </div>)
 }

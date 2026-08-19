@@ -1,4 +1,4 @@
-import type { backend_response, EquationDef, EqVarWDesc, FinStateSecColWHelp, FinStateSecRowWHelp, FinStateSection } from "@budgets_municipaux/common";
+import type { backend_response, EquationDef, EqVarWDesc, FinStateSecColWHelp, FinStateSecRowWHelp, FinStateSection, IndicatorConstant } from "@budgets_municipaux/common";
 import { serviceIndicatorEquation } from "../../../services/mun/serviceMunicIndicators";
 import type { VisualizationConfig } from "../../visualisation/types";
 import type { 
@@ -9,6 +9,7 @@ import type {
 import { serviceReportParts } from "../../../services/mun/serviceReportParts";
 import { serviceReportRows } from "../../../services/mun/serviceReportRows";
 import { serviceReportCols } from "../../../services/mun/serviceReportCols";
+import { serviceConstants } from "../../../services/common/serviceConstants";
 
 const initialSelection: indicatorEquationCreationSelection = {
     eq_id:null,
@@ -63,21 +64,32 @@ export const municIndicCreateVizConfig:
     async getData(selection: indicatorEquationCreationSelection) {
         let resp:backend_response<EquationDef[]>
         let respVars:backend_response<EqVarWDesc[]>
+        let respCst:backend_response<IndicatorConstant[]>
         if (selection.eq_id){
-            [resp,respVars] = await Promise.all([ 
+            [resp,respVars,respCst] = await Promise.all([ 
                 serviceIndicatorEquation.getEquations(selection.eq_id),  
-                serviceIndicatorEquation.getVariables(selection.eq_id)
+                serviceIndicatorEquation.getVariables(selection.eq_id),
+                serviceConstants.getConstants({eq_id:selection.eq_id})
             ])
-            if (resp.success===true&&resp.data&&respVars.success&&respVars.data){
+            if (
+                resp.success===true&&
+                resp.data&&
+                respVars.success&&
+                respVars.data&&
+                respCst.success&&
+                respCst.data
+            ){
                 return {
                     equation_def:resp.data[0],
-                    equation_vars:respVars.data
+                    equation_vars:respVars.data,
+                    equation_const:respCst.data
                 }
             }
         }
             return {
                 equation_def:null,
-                equation_vars:[]
+                equation_vars:[],
+                equation_const:[]
             }
         
     }

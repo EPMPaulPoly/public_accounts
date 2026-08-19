@@ -3,7 +3,8 @@ import type {
     EqVarWDesc, 
     FinStateSecColWHelp, 
     FinStateSecRowWHelp, 
-    FinStateSection 
+    FinStateSection, 
+    IndicatorConstant
 } from "@budgets_municipaux/common"
 
 export interface indicatorEquationCreationSelection{
@@ -23,5 +24,6 @@ export interface indicatorEquationsCreationViewOptions{
 
 export interface indicatorEquationsCreationViewData{
     equation_def:EquationDef|null,
-    equation_vars:EqVarWDesc[]
+    equation_vars:EqVarWDesc[],
+    equation_const:IndicatorConstant[]
 }

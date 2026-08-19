@@ -15,19 +15,28 @@ import CreateModMunicIndVarModal from "../components/objectCreation/CreateModMun
 import { Footer } from "../components/common/Footer";
 import { useAppContext } from "../context/contextProvider";
 import { UserSnackCommunication } from "../components/common/UserSnackCommunication";
+import { 
+    FormControl,  
+    InputLabel, 
+    MenuItem, 
+    Select
+} from "@mui/material";
+import { IndicatorConstantsDisplay } from "../components/visualisation/IndicatorConstantsDisplay";
+import { AddConstantUseModal } from "../components/objectCreation/AddConstantUseModal";
 
 
 function MunicIndicatorsCreation(){
     const viz= useMunicIndicatorsCreationVisualization()
     const [eqDefModalOpen,setEqDefModalOpen]=useState<boolean>(false);
     const [eqVarDefModalOpen,setEqVarDefModalOpen]=useState<boolean>(false);
-     
-    const {setSnackMessage,setSnackOpen,setSnackSev,snackMessage,snackOpen,snackSev}=useAppContext()
+    const [addConstantModalOpen,setAddConstantModalOpen]=useState<boolean>(false);
 
+    const [variableDisp, setVariableDisp] = useState<'finstate'|'constants'>('finstate');
+    const {setSnackMessage,setSnackOpen,setSnackSev,snackMessage,snackOpen,snackSev}=useAppContext()
 
     return(
         <div
-            style={{ height: '100vh', display: 'flex', flexDirection: 'column' ,gap:'10px'}}
+            style={{ height: '100vh', display: 'flex', flexDirection: 'column' ,gap:'10px',overflow:'hidden'}}
         >
             <div>
                 <MenuBar
@@ -60,7 +69,45 @@ function MunicIndicatorsCreation(){
                     }}
                 />
             </div>
-            <span></span>
+            {viz.selection.eq_id&&(
+            <span
+                style={{
+                    alignItems:'left',
+                    justifyItems:'left'
+                }}
+            >
+                <FormControl>
+                    <InputLabel id="varTypes-lab" >
+                        Provenance variables
+                    </InputLabel>
+                    <Select
+                        labelId="varTypes-lab"
+                        id="varTypes"
+                        label='Provenance variables'
+                        value={variableDisp}
+                        onChange={(e)=>
+                            e.target.value==='constants'||
+                            e.target.value==='finstate'?
+                            setVariableDisp(e.target.value):
+                            console.log(e.target)
+                        }
+                        sx={{minWidth:'200px'}}
+                    >
+                        <MenuItem
+                            key='finstate'
+                            value='finstate'
+                        >
+                            État financiers
+                        </MenuItem>
+                        <MenuItem
+                            key='constants'
+                            value='constants'
+                        >
+                            Constantes
+                        </MenuItem>
+                    </Select>
+                </FormControl>
+            </span>)}
             <div
                 style={{ 
                     flex: 1, 
@@ -68,27 +115,41 @@ function MunicIndicatorsCreation(){
                     width:'100%',
                     minWidth: 0,
                     minHeight: 0,
+                    gap:'10px',
                 }}
             >
                 {/* Equation variables table*/}
-
-                <IndicatorVariablesDisplay
-                    selection={{
-                        part_id:viz.selection.part_id,
-                        eq_id:viz.selection.eq_id
-                    }}
-                    options={{
-                        parts:viz.options?.parts??[],
-                        rows:viz.options?.rows??[],
-                        cols:viz.options?.cols??[]
-                    }}
-                    onEdit={{
-                        setModifiedVar:viz.setSelectedVariable,
-                        setVarCreateEditFlag:viz.setEqVarUpdateOrCreateFlag,
-                        setModalOpen:setEqVarDefModalOpen
-                    }}
-                    data={viz.data?.equation_vars??[]}
-                />
+                {
+                    variableDisp==='finstate'?<>
+                        <IndicatorVariablesDisplay
+                            selection={{
+                                part_id:viz.selection.part_id,
+                                eq_id:viz.selection.eq_id
+                            }}
+                            options={{
+                                parts:viz.options?.parts??[],
+                                rows:viz.options?.rows??[],
+                                cols:viz.options?.cols??[]
+                            }}
+                            onEdit={{
+                                setModifiedVar:viz.setSelectedVariable,
+                                setVarCreateEditFlag:viz.setEqVarUpdateOrCreateFlag,
+                                setModalOpen:setEqVarDefModalOpen
+                            }}
+                            data={viz.data?.equation_vars??[]}
+                        />
+                    </>:<>
+                        <IndicatorConstantsDisplay
+                            eq_id={viz.selection.eq_id}
+                            data={viz.data?.equation_const??[]}
+                            onAction={{
+                                setConstantAddModalOpen:setAddConstantModalOpen,
+                                forceUpdate:viz.forceUpdate
+                            }}
+                        />
+                    </>
+                }
+                
                 <CreateMunicIndicatorModal
                     values={{
                         modalOpen:eqDefModalOpen,
@@ -125,6 +186,16 @@ function MunicIndicatorsCreation(){
                     onNew={viz.createEquationVar}
                     onUpdate={viz.updateEquationVar}
                     data={viz.data?.equation_vars??[]}
+                />
+                <AddConstantUseModal
+                    selection={{
+                        eq_id:viz.selection.eq_id,
+                        addConstantModalOpen:addConstantModalOpen
+                    }}
+                    onAction={{
+                        setAddConstantModalOpen:setAddConstantModalOpen,
+                        forceUpdate:viz.forceUpdate
+                    }}
                 />
             </div>
             <UserSnackCommunication

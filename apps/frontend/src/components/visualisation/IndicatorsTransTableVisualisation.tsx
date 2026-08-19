@@ -58,6 +58,7 @@ export default function IndicatorsTransTableVisualisation(props:ITTVProps){
 
                     </TableCell>
                     {props.data&&props.data[0]?.cells.map((c)=><TableCell align="right">{c.prov_rep_id} </TableCell>)}
+                    {props.data&&props.data[0]?.consts.map((cst)=><TableCell align="right">{cst.symbol}</TableCell>)}
                 </TableRow>
                 <TableRow
                     key='header'
@@ -67,7 +68,8 @@ export default function IndicatorsTransTableVisualisation(props:ITTVProps){
                     >
                         Ville
                     </TableCell>
-                        {props.data&&props.data[0]?.cells.map((c)=><TableCell align="right" key={c.eq_var_id+'-header'}>{c.eq_var_symbol} [$]</TableCell>)}
+                        {props.data&&props.data[0]?.cells.map((c)=><TableCell align="right">{c.eq_var_symbol} [$]</TableCell>)}
+                        {props.data&&props.data[0]?.consts.map((cst)=><TableCell align="right">{cst.symbol}</TableCell>)}
                     <TableCell align="right" key='result-header'>
                         {props.capitation?'Résultat [$/pers]':'Résulat [$]'}
                     </TableCell>
@@ -84,9 +86,14 @@ export default function IndicatorsTransTableVisualisation(props:ITTVProps){
                             {city.nom_organisme}
                         </TableCell>
                         {city.cells.map((cell)=>
-                            <TableCell align="right" key={'city-'+city.cod_geo+'-var-'+cell.eq_var_id}>
+                            <TableCell align="right">
                                 {accounting.format(cell.value)}
                             </TableCell>)}
+                        {city.consts.map((cst)=>
+                            <TableCell  align="right">
+                                {accounting.format(cst.default_value)}
+                            </TableCell>
+                        )}
                         <TableCell align="right" key={'result-'+city.cod_geo}>
                             {accounting.format(city.result)}
                         </TableCell>
