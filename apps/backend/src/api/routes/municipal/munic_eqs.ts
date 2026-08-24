@@ -1,6 +1,8 @@
 import { Router } from 'express'
 import { validate } from '../../middleware/validate.js'
 import { 
+    ConstantUseCreateSchema,
+    ConstantUseIdSchema,
     DeleteEquationScheme,
     DeleteVariableScheme,
     GetEquationResultsSchema,
@@ -12,8 +14,10 @@ import {
     PutVariableScheme
 } from '../../validators/municipal/munic_eqs.validators.js'
 import { 
+    addConstantUse,
     createEquation, 
     createVariable, 
+    deleteConstantUse, 
     deleteEquation, 
     deleteVariable, 
     getEquations, 
@@ -32,10 +36,12 @@ const MunicEquationsRouter=()=>{
     router.get('/result',validate(GetEquationResultsSchema),getResults)
     router.post('/equation',requireAuth,requireRole('user'),validate(PostEquationScheme),createEquation)
     router.post('/variable',requireAuth,requireRole('user'),validate(PostVariableScheme),createVariable)
+    router.post('/constant-use',requireAuth,requireRole('user'),validate(ConstantUseCreateSchema),addConstantUse)
     router.put('/equation/:eq_id',requireAuth,requireRole('user'),validate(PutEquationScheme),updateEquation)
     router.put('/variable/:eq_var_id',requireAuth,requireRole('user'),validate(PutVariableScheme),updateVariable)
     router.delete('/equation/:eq_id',requireAuth,requireRole('user'),validate(DeleteEquationScheme),deleteEquation)
     router.delete('/variable/:eq_var_id',requireAuth,requireRole('user'),validate(DeleteVariableScheme),deleteVariable)
+    router.delete('/constant-use/:use_id',requireAuth,requireRole('user'),validate(ConstantUseIdSchema),deleteConstantUse)
     return router
 
 }

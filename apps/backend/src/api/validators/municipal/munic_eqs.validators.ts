@@ -75,3 +75,16 @@ export const DeleteVariableScheme=z.object({
         eq_var_id:z.coerce.number().int()
     })
 })
+
+export const ConstantUseCreateSchema=z.object({
+    body:z.object({
+        eq_id:z.coerce.number().int(),
+        const_id:z.coerce.number().int()
+    })
+})
+
+export const ConstantUseIdSchema = z.object({
+    params:z.object({
+        use_id:z.coerce.number().int()
+    })
+})

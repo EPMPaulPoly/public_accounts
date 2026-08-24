@@ -4,11 +4,11 @@ import { Database } from "../../../db/types.js";
 
 export const getEqsRepo = async (
     db: Kysely<Database> | Transaction<Database>,
-    eq_id: number | undefined
+    eq_id?: number[] | undefined
 ) => {
     let query = db.selectFrom('municipal_qc.eqs_table').selectAll()
     if (eq_id) {
-        query = query.where('eq_id', '=', eq_id)
+        query = query.where('eq_id', 'in', eq_id)
     }
     const data = await query.execute()
     return data
@@ -59,7 +59,19 @@ interface filters {
 export const getEquationCalcPrecRepo = async (
     db: Kysely<Database> | Transaction<Database>,
     filts: filters
-) => {
+):Promise<{cod_geo:number,
+        year:number,
+        nom_organisme:string,
+        population:number,
+        part_id:number,
+        row_id:number,
+        col_id:number,
+        eq_var_symbol:string,
+        eq_id:number,
+        eq_name:string,
+        eq_expression:string,
+        prov_rep_id:string,
+        value:number}[]> => {
     let query = db.selectFrom('municipal_qc.eqs_table as e')
         .leftJoin('municipal_qc.eq_vars_table as ev',
             (join) => join.onRef('ev.eq_id', '=', 'e.eq_id'))
@@ -113,7 +125,19 @@ export const getEquationCalcPrecRepo = async (
         'm.prov_rep_id',
         sql<number>`COALESCE(d.value,0)::bigint`.as('value'),
     ]).orderBy('mun.population','desc').orderBy('eq_var_id','asc')
-    const data = await query.execute()
+    const data = await query.execute() as unknown[] as {cod_geo:number,
+        year:number,
+        nom_organisme:string,
+        population:number,
+        part_id:number,
+        row_id:number,
+        col_id:number,
+        eq_var_symbol:string,
+        eq_id:number,
+        eq_name:string,
+        eq_expression:string,
+        prov_rep_id:string,
+        value:number}[]
     return data
 }
 
@@ -202,5 +226,36 @@ export const deleteEquationVarCalcRepo = async (
         .where('eq_var_id', '=', eq_var_id)
         .returningAll()
         .execute()
+    return data
+}
+
+/**addConstantUseRepo
+ * function used to assign a constant to be used in a variable
+ * @param db the Kysely database connection to use
+ * @param eq_id the equation to which we'assigning a constant
+ * @param const_id the constant being assigned
+ * @returns the newly created assigment of the cosnant to the equation
+ */
+export const addConstantUseRepo = async (
+    db: Kysely<Database> | Transaction<Database>,
+    eq_id: number,
+    const_id:number
+)=>{
+    const data = await db.insertInto('municipal_qc.constant_use_table').values({eq_id:eq_id,const_id:const_id}).returningAll().execute()
+    return data
+}
+
+
+/**deleteConstantUseRepo
+ * Deletion of constant use in a repo
+ * @param db the Kysely database connection to use
+ * @param use_id the use whihc we're trying to delete
+ * @returns 
+ */
+export const deleteConstantUseRepo = async(
+    db: Kysely<Database> | Transaction<Database>,
+    use_id: number,
+)=>{
+    const data = await db.deleteFrom('municipal_qc.constant_use_table').where('municipal_qc.constant_use_table.use_id','=',use_id).returningAll().execute()
     return data
 }

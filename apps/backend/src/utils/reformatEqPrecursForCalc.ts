@@ -24,6 +24,7 @@ export function reformatEqPrecursorForCalc(
                 year: cell.year,
                 population:cell.population,
                 cells: [],
+                consts:[],
                 scope: {}
             };
 

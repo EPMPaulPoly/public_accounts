@@ -1,4 +1,4 @@
-import { RequestHandler,Request, Response} from "express"
+import { RequestHandler,Request, Response, NextFunction} from "express"
 import { municEqsService } from "../../services/municipal/municipal_eqs.services.js"
 
 export const getEquations: RequestHandler = async (
@@ -161,3 +161,26 @@ export const deleteEquation:RequestHandler=async(req:Request,res:Response,next)=
         res.status(500).json({success:false,message:'error deleting equation '})
     }
 }
+
+export const addConstantUse:RequestHandler=async(req:Request,res:Response,next:NextFunction)=>{
+    try {
+        const {const_id,eq_id}= req.validated?.body as {const_id:number,eq_id:number}
+        const result= await municEqsService.addConstantUseServ(eq_id,const_id)
+        res.status(200).json({success:true,data:result})
+    } catch (error:any) {
+        console.log(error.message)
+        res.status(500).json({success:false, message:`Error when adding constant to equation: ${error.message}`})
+    }
+}
+
+export const deleteConstantUse:RequestHandler=async(req:Request,res:Response,next:NextFunction)=>{
+    try {
+        const {use_id}= req.validated?.params as {use_id:number}
+        const result = await municEqsService.deleteConstantUseServ(use_id)
+        res.status(200).json({success:true,data:result})
+    } catch (error:any) {
+        console.log(error.message)
+        res.status(500).json({success:false, message:`Error when adding constant to equation: ${error.message}`})
+    }
+}
+

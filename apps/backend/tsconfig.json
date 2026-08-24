@@ -10,7 +10,9 @@
         "module": "nodenext",
         "moduleResolution": "nodenext",
         // For nodejs:
-        // "lib": ["esnext"],
+        "lib": [
+            "ES2021.String"
+        ],
         // "types": ["node"],
         // and npm install -D @types/node
         // Other Outputs
